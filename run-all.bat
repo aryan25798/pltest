@@ -1,6 +1,10 @@
 @echo off
 echo ========================================================
-echo Running Full Automation Suite (All Modules)
+echo Running ProjectLens Test Automation Suite
 echo ========================================================
-mvn test -Pall
+mvn test
+echo ========================================================
+echo Execution Completed!
+echo Extent Report generated at: test-output\ExecutionReport.html
+echo ========================================================
 pause

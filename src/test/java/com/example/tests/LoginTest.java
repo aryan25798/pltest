@@ -159,7 +159,9 @@ public class LoginTest extends BaseTest {
     public void testTC08_VerifyAccessToProtectedPageWithoutLogin() {
         Map<String, String> data = DataProviders.getTestCaseData("TC08");
 
-        driver.get("https://project-lens-beta.vercel.app/dashboard");
+        String baseUrl = com.example.utils.ConfigReader.getProperty("app.baseUrl");
+        String targetUrl = baseUrl.replace("/login", "") + "/dashboard";
+        driver.get(targetUrl);
 
         LoginPage loginPage = new LoginPage(driver);
         Assert.assertTrue(loginPage.isLoginPageDisplayed() || driver.getCurrentUrl().contains(data.get("Expected_URL_Fraction")),

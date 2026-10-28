@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectLens Test Automation — Complete Beginner Master Guide</title>
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --secondary: #0f172a;
+            --sidebar-bg: #1e293b;
+            --accent: #38bdf8;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --code-bg: #0f172a;
+            --code-text: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+        }
+
+        /* Sidebar Navigation */
+        #sidebar {
+            width: 330px;
+            background-color: var(--sidebar-bg);
+            color: #cbd5e1;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            padding: 24px 16px;
+            flex-shrink: 0;
+            border-right: 1px solid #334155;
+        }
+
+        #sidebar h2 {
+            color: var(--accent);
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+        }
+
+        #sidebar p.sub {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        #sidebar ul {
+            list-style: none;
+        }
+
+        #sidebar li {
+            margin-bottom: 4px;
+        }
+
+        #sidebar a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.86rem;
+            display: block;
+            padding: 7px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        #sidebar a:hover {
+            background-color: #334155;
+            color: var(--accent);
+            transform: translateX(3px);
+        }
+
+        #sidebar .nav-header {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            font-weight: 700;
+            margin: 18px 0 6px 8px;
+        }
+
+        /* Main Container */
+        #content {
+            flex-grow: 1;
+            padding: 40px 50px;
+            max-width: 1200px;
+        }
+
+        header.hero {
+            background: linear-gradient(135deg, #0369a1 0%, #0f172a 100%);
+            color: white;
+            padding: 36px 32px;
+            border-radius: 14px;
+            margin-bottom: 36px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        header.hero h1 {
+            font-size: 2.1rem;
+            margin-bottom: 10px;
+            color: #e0f2fe;
+        }
+
+        header.hero p {
+            font-size: 1.02rem;
+            color: #bae6fd;
+            max-width: 820px;
+        }
+
+        .badge-bar {
+            display: flex;
+            gap: 8px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #f8fafc;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-weight: 600;
+        }
+
+        /* Sections */
+        section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        h2.section-heading {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        h3.sub-heading {
+            font-size: 1.2rem;
+            color: #0369a1;
+            margin: 24px 0 10px 0;
+        }
+
+        p, li {
+            font-size: 0.95rem;
+            color: #334155;
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            padding-left: 22px;
+            margin-bottom: 16px;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 18px 0;
+            border-left: 5px solid;
+            font-size: 0.94rem;
+        }
+
+        .callout-interview {
+            background-color: #f0f9ff;
+            border-color: #0284c7;
+            color: #0c4a6e;
+        }
+
+        .callout-tip {
+            background-color: #f0fdf4;
+            border-color: var(--success);
+            color: #14532d;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Side-by-side Table */
+        table.side-by-side {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            table-layout: fixed;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        table.side-by-side th {
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+        }
+
+        table.side-by-side th:first-child {
+            width: 48%;
+            border-right: 1px solid #334155;
+        }
+
+        table.side-by-side th:last-child {
+            width: 52%;
+        }
+
+        table.side-by-side td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        table.side-by-side tr:nth-child(even) td.code-col {
+            background-color: #131d33;
+        }
+
+        table.side-by-side tr:nth-child(odd) td.code-col {
+            background-color: #0f172a;
+        }
+
+        table.side-by-side tr:nth-child(even) td.desc-col {
+            background-color: #f8fafc;
+        }
+
+        table.side-by-side tr:nth-child(odd) td.desc-col {
+            background-color: #ffffff;
+        }
+
+        td.code-col {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.83rem;
+            color: #e2e8f0;
+            white-space: pre-wrap;
+            word-break: break-all;
+            border-right: 1px solid #334155;
+        }
+
+        td.code-col .kw { color: #f472b6; font-weight: 600; }
+        td.code-col .anno { color: #fbbf24; font-weight: 600; }
+        td.code-col .str { color: #34d399; }
+        td.code-col .cls { color: #38bdf8; font-weight: 600; }
+        td.code-col .func { color: #60a5fa; }
+        td.code-col .comment { color: #94a3b8; font-style: italic; }
+
+        td.desc-col {
+            color: #334155;
+            font-size: 0.88rem;
+        }
+
+        .dir-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .dir-card h4 {
+            color: var(--secondary);
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: monospace;
+        }
+
+        .dir-card p {
+            margin: 0;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        code.inline {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.86rem;
+            font-family: monospace;
+            border: 1px solid #e2e8f0;
+        }
+
+        .file-badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar">
+        <h2>📘 Notes Index</h2>
+        <p class="sub">ProjectLens Interview Preparation</p>
+
+        <div class="nav-header">Structure & Overview</div>
+        <ul>
+            <li><a href="#dir-structure">1. Directory Structure & Files</a></li>
+            <li><a href="#pom-architecture">2. Page Object Model Flow</a></li>
+        </ul>
+
+        <div class="nav-header">⭐ Primary Focus (Trainer Review)</div>
+        <ul>
+            <li><a href="#trainer-overview">3. Trainer Business Story</a></li>
+            <li><a href="#reviewspage-sidebyside">4. ReviewsPage.java (Side-by-Side)</a></li>
+            <li><a href="#trainertest-sidebyside">5. TrainerReviewTest.java (Side-by-Side)</a></li>
+        </ul>
+
+        <div class="nav-header">Core Framework Files</div>
+        <ul>
+            <li><a href="#basepage-sidebyside">6. BasePage.java</a></li>
+            <li><a href="#basetest-sidebyside">7. BaseTest.java</a></li>
+            <li><a href="#drivermanager-sidebyside">8. DriverManager.java</a></li>
+            <li><a href="#configreader-sidebyside">9. ConfigReader.java</a></li>
+            <li><a href="#waitutils-sidebyside">10. WaitUtils.java</a></li>
+            <li><a href="#excelreader-sidebyside">11. ExcelReader.java</a></li>
+            <li><a href="#dataproviders-sidebyside">12. DataProviders.java</a></li>
+            <li><a href="#reportmanager-sidebyside">13. ReportManager.java</a></li>
+            <li><a href="#testlistener-sidebyside">14. TestListener.java</a></li>
+            <li><a href="#pom-sidebyside">15. pom.xml & testng.xml</a></li>
+        </ul>
+
+        <div class="nav-header">Interview Success</div>
+        <ul>
+            <li><a href="#speech">16. Word-for-Word Pitch</a></li>
+            <li><a href="#interview-qa">17. Top 15 Interview Q&A</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="content">
+
+        <!-- Hero -->
+        <header class="hero">
+            <h1>ProjectLens Automation: Line-by-Line Study Notes</h1>
+            <p>Every single line of code in this project is explained side-by-side with its exact plain-English meaning. Specially built for beginners preparing for a Selenium Automation interview.</p>
+            <div class="badge-bar">
+                <span class="pill">📁 Full Directory Breakdown</span>
+                <span class="pill">📝 Side-by-Side Line Explanations</span>
+                <span class="pill">⭐ Trainer Review Module Focus</span>
+                <span class="pill">🎯 Interview-Ready Answers</span>
+            </div>
+        </header>
+
+        <!-- SECTION 1: DIRECTORY STRUCTURE PROPERLY EXPLAINED -->
+        <section id="dir-structure">
+            <h2 class="section-heading">1. Directory Structure & What Each File Does</h2>
+            <p>Every file in your project has one single, clear responsibility. Here is the exact directory layout and the job of every folder and file:</p>
+
+            <div class="dir-card">
+                <h4>📁 src/main/java/com/example/pages/</h4>
+                <p><strong>Page Object Classes:</strong> These classes represent the web pages. They contain the page's HTML element locators (<code class="inline">By</code>) and action methods (e.g. typing, clicking). They never contain assertion checks.</p>
+            </div>
+
+            <div style="margin-left: 24px;">
+                <div class="dir-card" style="border-left-color: #0ea5e9;">
+                    <h4>📄 BasePage.java</h4>
+                    <p><strong>Common Parent Class:</strong> Provides reusable wrapper methods (<code class="inline">click()</code>, <code class="inline">enterText()</code>, <code class="inline">getText()</code>, <code class="inline">isDisplayed()</code>) with explicit waits so we don't repeat code across pages.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #0284c7; background: #f0f9ff;">
+                    <h4>📄 ReviewsPage.java ⭐ (Your Primary Module)</h4>
+                    <p><strong>Trainer Review Page Object:</strong> Contains locators for the Decision Queue, project detail panel, comments textarea, and action buttons (<code class="inline">Approve</code>, <code class="inline">Needs Revision</code>, <code class="inline">Reject</code>).</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #0ea5e9;">
+                    <h4>📄 LoginPage.java</h4>
+                    <p><strong>Login Page Object:</strong> Locators for email input, password input, show/hide password toggle, and the Sign In button.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #0ea5e9;">
+                    <h4>📄 DashboardPage.java</h4>
+                    <p><strong>Dashboard & Navigation:</strong> Locators and methods to verify page hydration and trigger user <code class="inline">logout()</code>.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #0ea5e9;">
+                    <h4>📄 ProjectSubmissionPage.java</h4>
+                    <p><strong>Idea Submission Form:</strong> Locators and actions to submit title, problem statement, objectives, and tech stack.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #0ea5e9;">
+                    <h4>📄 SubmissionsPage.java</h4>
+                    <p><strong>Submissions List:</strong> Inspects submitted project cards, AI alignment percentage scores, and evaluation details.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #0ea5e9;">
+                    <h4>📄 ReviseSubmissionPage.java</h4>
+                    <p><strong>Revision Workflow:</strong> Handles editing existing submissions and triggering re-upload evaluation.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #0ea5e9;">
+                    <h4>📄 NotificationsPage.java</h4>
+                    <p><strong>System Alerts:</strong> Reads real-time alert notifications, marks them as read, and verifies timestamps.</p>
+                </div>
+            </div>
+
+            <div class="dir-card">
+                <h4>📁 src/main/java/com/example/utils/</h4>
+                <p><strong>Utility Helper Classes:</strong> Non-UI support tools for browser creation, reading config files, reading Excel files, and generating reports.</p>
+            </div>
+
+            <div style="margin-left: 24px;">
+                <div class="dir-card" style="border-left-color: #10b981;">
+                    <h4>📄 DriverManager.java</h4>
+                    <p><strong>Browser Lifecycle Manager:</strong> Launches Chrome/Edge/Firefox with <code class="inline">ThreadLocal&lt;WebDriver&gt;</code> to ensure thread safety during parallel runs.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #10b981;">
+                    <h4>📄 ConfigReader.java</h4>
+                    <p><strong>Configuration Loader:</strong> Reads key-value pairs from <code class="inline">config.properties</code> (e.g. <code class="inline">app.baseUrl</code>, <code class="inline">browser</code>).</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #10b981;">
+                    <h4>📄 WaitUtils.java</h4>
+                    <p><strong>Explicit Wait Synchronization:</strong> Uses <code class="inline">WebDriverWait</code> with conditions like <code class="inline">visibilityOfElementLocated</code> and <code class="inline">elementToBeClickable</code>.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #10b981;">
+                    <h4>📄 ExcelReader.java</h4>
+                    <p><strong>Apache POI Excel Parser:</strong> Reads tabular rows from <code class="inline">TestData.xlsx</code> into Java <code class="inline">List&lt;Map&lt;String, String&gt;&gt;</code>.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #10b981;">
+                    <h4>📄 DataProviders.java</h4>
+                    <p><strong>TestNG Data Feeder:</strong> Contains <code class="inline">@DataProvider</code> methods that inject Excel rows into test cases dynamically.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #10b981;">
+                    <h4>📄 ReportManager.java</h4>
+                    <p><strong>ExtentReports Manager:</strong> Configures and initializes the HTML report file at <code class="inline">test-output/ExecutionReport.html</code>.</p>
+                </div>
+            </div>
+
+            <div class="dir-card">
+                <h4>📁 src/test/java/com/example/</h4>
+                <p><strong>Test Scripts & Listeners:</strong> All executable test logic using TestNG assertions.</p>
+            </div>
+
+            <div style="margin-left: 24px;">
+                <div class="dir-card" style="border-left-color: #8b5cf6;">
+                    <h4>📄 base/BaseTest.java</h4>
+                    <p><strong>Test Suite Superclass:</strong> Contains <code class="inline">@BeforeMethod</code> (launches browser and opens URL) and <code class="inline">@AfterMethod</code> (closes browser).</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #8b5cf6;">
+                    <h4>📄 listeners/TestListener.java</h4>
+                    <p><strong>TestNG Event Listener:</strong> Listens for test success/failure, attaches failure screenshots, and writes ExtentReports.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #8b5cf6; background: #fdf4ff;">
+                    <h4>📄 tests/TrainerReviewTest.java ⭐ (Your Primary Module)</h4>
+                    <p><strong>Trainer Review Test Cases:</strong> 5 comprehensive tests: Navigation, Details panel display, Approve decision, Needs Revision decision, and Reject decision.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #8b5cf6;">
+                    <h4>📄 tests/LoginTest.java</h4>
+                    <p><strong>Authentication Tests:</strong> Valid login, invalid login (DDT), password masking, protected routes, and logout.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #8b5cf6;">
+                    <h4>📄 tests/FormValidationTest.java</h4>
+                    <p><strong>Submission Validation Tests:</strong> Cohort criteria, 70% alignment requirement, and missing field alerts.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #8b5cf6;">
+                    <h4>📄 tests/NotificationTest.java</h4>
+                    <p><strong>Notification Tests:</strong> Real-time alerts, low/high score notifications, read status, and pod isolation.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #8b5cf6;">
+                    <h4>📄 tests/ReviseSubmissionTest.java</h4>
+                    <p><strong>Revision Tests:</strong> Editable field state, re-upload analysis, and submission preservation.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #8b5cf6;">
+                    <h4>📄 tests/FormDataUpdationTest.java</h4>
+                    <p><strong>Persistence Tests (FDU_01 to FDU_10):</strong> Data persistence across roles (Lead, Member, Trainer), page refresh, and re-login.</p>
+                </div>
+            </div>
+
+            <div class="dir-card">
+                <h4>📁 Configuration & Test Data</h4>
+            </div>
+
+            <div style="margin-left: 24px;">
+                <div class="dir-card" style="border-left-color: #f59e0b;">
+                    <h4>📄 src/test/resources/config/config.properties</h4>
+                    <p>Application base URL (<code class="inline">https://project-lens-beta.vercel.app/login</code>), browser name, and wait timeouts.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #f59e0b;">
+                    <h4>📄 src/test/resources/testdata/TestData.xlsx</h4>
+                    <p>Excel workbook containing 7 separate sheets with test data for every scenario.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #f59e0b;">
+                    <h4>📄 testng.xml</h4>
+                    <p>Master suite XML file listing all 6 test classes to execute.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #f59e0b;">
+                    <h4>📄 pom.xml</h4>
+                    <p>Maven dependencies (Selenium, TestNG, POI, ExtentReports) and Surefire plugin configuration.</p>
+                </div>
+                <div class="dir-card" style="border-left-color: #f59e0b;">
+                    <h4>📄 run-all.bat</h4>
+                    <p>Windows 1-click execution script that triggers <code class="inline">mvn test</code>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: POM ARCHITECTURE -->
+        <section id="pom-architecture">
+            <h2 class="section-heading">2. How the Page Object Model (POM) Works Together</h2>
+            <p>Here is how control flows when a test runs:</p>
+
+            <div class="callout callout-interview">
+                <div class="callout-title">🔄 The 3-Step Execution Cycle</div>
+                <ol>
+                    <li><strong>BaseTest (@BeforeMethod):</strong> Launches Chrome browser, maximizes the window, and opens the login URL.</li>
+                    <li><strong>Test Method (e.g. TrainerReviewTest):</strong>
+                        <ul>
+                            <li>Calls <code class="inline">LoginPage.login()</code> to authenticate as Trainer.</li>
+                            <li>Calls <code class="inline">ReviewsPage.navigateToReviews()</code> to open the review queue.</li>
+                            <li>Calls <code class="inline">ReviewsPage.clickApprove()</code> to approve the idea.</li>
+                            <li>Runs <code class="inline">Assert.assertTrue(...)</code> to verify the decision updated the queue.</li>
+                        </ul>
+                    </li>
+                    <li><strong>BaseTest (@AfterMethod):</strong> Closes the Chrome browser cleanly.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TRAINER REVIEW BUSINESS STORY -->
+        <section id="trainer-overview" style="border: 2px solid #0284c7;">
+            <h2 class="section-heading" style="color: #0369a1;">⭐ 3. Trainer Review Module: Business Flow & User Story</h2>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">🎯 Your Exact Role in the Team</div>
+                <p><em>"My primary responsibility was automating the <strong>Trainer Review Module</strong>. The Trainer is the final evaluator in the ProjectLens platform. When student Pods submit project ideas, an AI engine calculates an initial alignment score. Then the Trainer reviews the submission in the Decision Queue to either <strong>Approve</strong>, <strong>Request Revision</strong>, or <strong>Reject</strong> the project with feedback comments."</em></p>
+            </div>
+
+            <h3 class="sub-heading">The 5 Test Cases You Automated in Trainer Review:</h3>
+            <table class="explain-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Test ID</th>
+                        <th style="width: 35%;">Test Scenario</th>
+                        <th>Expected Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-cell">TC01</td>
+                        <td>Verify Navigation to Reviews Queue</td>
+                        <td>URL contains <code class="inline">/reviews</code> and the "Decision queue" header is displayed.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC02</td>
+                        <td>Verify Submission Details Display</td>
+                        <td>Clicking a submission displays its Project Title, Alignment Score, Problem Statement, and Tech Stack.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC04</td>
+                        <td>Verify Successful Submission Approval</td>
+                        <td>Entering feedback and clicking <strong>Approve</strong> removes the project from the pending queue.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC05</td>
+                        <td>Verify Requesting Revision</td>
+                        <td>Entering comments and clicking <strong>Needs Revision</strong> updates status to require rework.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC06</td>
+                        <td>Verify Rejection Flow</td>
+                        <td>Entering rejection reasons and clicking <strong>Reject</strong> finalizes the rejection.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 4: REVIEWSPAGE SIDE-BY-SIDE -->
+        <section id="reviewspage-sidebyside">
+            <h2 class="section-heading">4. ReviewsPage.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/example/pages/ReviewsPage.java</span>
+            <p><strong>What this file is doing:</strong> This is the Page Object class for the Trainer Review screen. It holds the element locators for the sidebar tab, the queue list, the details panel, the feedback comment box, and the three decision buttons (<code class="inline">Approve</code>, <code class="inline">Needs Revision</code>, <code class="inline">Reject</code>).</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="kw">package</span> com.example.pages;</td>
+                        <td class="desc-col">Places this class inside the <code class="inline">pages</code> package according to standard Page Object Model convention.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">import</span> com.example.utils.WaitUtils;
+<span class="kw">import</span> org.openqa.selenium.By;
+<span class="kw">import</span> org.openqa.selenium.JavascriptExecutor;
+<span class="kw">import</span> org.openqa.selenium.WebDriver;
+<span class="kw">import</span> org.openqa.selenium.WebElement;
+<span class="kw">import</span> java.util.List;</td>
+                        <td class="desc-col">Imports required Selenium classes for locating elements (<code class="inline">By</code>), browser actions (<code class="inline">WebDriver</code>), and our wait utility (<code class="inline">WaitUtils</code>).</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public class</span> <span class="cls">ReviewsPage</span> <span class="kw">extends</span> <span class="cls">BasePage</span> {</td>
+                        <td class="desc-col">Declares <code class="inline">ReviewsPage</code> and inherits common helper methods (<code class="inline">click</code>, <code class="inline">enterText</code>, <code class="inline">getText</code>) from <code class="inline">BasePage</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> reviewsNavTab = 
+    <span class="cls">By</span>.<span class="func">xpath</span>(<span class="str">"//a[contains(@href,'reviews') or contains(.,'Reviews')]"</span>);</td>
+                        <td class="desc-col">Locator for the "Reviews" tab in the left sidebar menu. Uses XPath union so it works even if the link text or href slightly changes.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> decisionQueueHeader = 
+    <span class="cls">By</span>.<span class="func">xpath</span>(<span class="str">"//h2[contains(text(),'Decision queue')]"</span>);</td>
+                        <td class="desc-col">Locator for the header title "Decision queue". Used to verify that the Trainer has successfully reached the reviews page.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> reviewItems = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">"button.review-item"</span>);</td>
+                        <td class="desc-col">Locator for each pending submission card button inside the queue list.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> detailPanel = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">".detail-panel, section[class*='detail']"</span>);</td>
+                        <td class="desc-col">Locator for the right-hand panel that opens when a Trainer clicks a submission to read its details.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> projectTitle = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">".detail-head h3, .detail-panel h3, h3"</span>);</td>
+                        <td class="desc-col">Locator for the project's title inside the detail panel.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> commentsTextarea = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">"textarea[placeholder*='Add comments for the pod']"</span>);</td>
+                        <td class="desc-col">Locator for the feedback text box where the Trainer types remarks for the pod.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> approveButton = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">"button.decision.approve, button[class*='approve']"</span>);</td>
+                        <td class="desc-col">Locator for the green "Approve" button.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> reviseButton = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">"button.decision.revise, button[class*='revise']"</span>);</td>
+                        <td class="desc-col">Locator for the "Needs Revision" button.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> rejectButton = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">"button.decision.reject, button[class*='reject']"</span>);</td>
+                        <td class="desc-col">Locator for the red "Reject" button.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public</span> <span class="cls">ReviewsPage</span>(<span class="cls">WebDriver</span> driver) {
+      <span class="kw">super</span>(driver);
+  }</td>
+                        <td class="desc-col">Constructor: Receives the browser <code class="inline">driver</code> from the test and passes it to <code class="inline">BasePage</code> using <code class="inline">super(driver)</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public void</span> <span class="func">navigateToReviews</span>() {
+      <span class="cls">WebElement</span> nav = <span class="cls">WaitUtils</span>.<span class="func">waitForElementVisible</span>(driver, reviewsNavTab, 10);
+      <span class="kw">try</span> { nav.<span class="func">click</span>(); }
+      <span class="kw">catch</span> (<span class="cls">Exception</span> e) {
+          ((<span class="cls">JavascriptExecutor</span>) driver).<span class="func">executeScript</span>(<span class="str">"arguments[0].click();"</span>, nav);
+      }
+      <span class="cls">WaitUtils</span>.<span class="func">waitForUrlContains</span>(driver, <span class="str">"reviews"</span>, 10);
+  }</td>
+                        <td class="desc-col">Waits up to 10 seconds for the "Reviews" tab to be visible, clicks it (with a JavaScript click fallback if blocked), and waits until URL contains "reviews".</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public boolean</span> <span class="func">isDecisionQueueDisplayed</span>() {
+      <span class="kw">return</span> <span class="func">isDisplayed</span>(decisionQueueHeader);
+  }</td>
+                        <td class="desc-col">Checks if the "Decision queue" title is visible on screen. Returns <code class="inline">true</code> or <code class="inline">false</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public int</span> <span class="func">getQueueItemCount</span>() {
+      <span class="cls">List</span>&lt;<span class="cls">WebElement</span>&gt; items = driver.<span class="func">findElements</span>(reviewItems);
+      <span class="kw">return</span> items.<span class="func">size</span>();
+  }</td>
+                        <td class="desc-col">Counts how many pending submissions are currently in the queue.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public void</span> <span class="func">selectFirstSubmission</span>() {
+      <span class="cls">List</span>&lt;<span class="cls">WebElement</span>&gt; items = driver.<span class="func">findElements</span>(reviewItems);
+      <span class="kw">if</span> (!items.<span class="func">isEmpty</span>()) { items.<span class="func">get</span>(0).<span class="func">click</span>(); }
+  }</td>
+                        <td class="desc-col">Clicks the first pending project in the list to open its details panel.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public boolean</span> <span class="func">isSubmissionDetailsDisplayed</span>() {
+      <span class="kw">return</span> <span class="func">isDisplayed</span>(detailPanel) || <span class="func">isDisplayed</span>(projectTitle);
+  }</td>
+                        <td class="desc-col">Verifies if the right-side detail panel has opened.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public void</span> <span class="func">enterComments</span>(<span class="cls">String</span> comments) {
+      <span class="func">enterText</span>(commentsTextarea, comments);
+  }</td>
+                        <td class="desc-col">Types the trainer's feedback comments into the textarea.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public void</span> <span class="func">clickApprove</span>() {
+      <span class="cls">WebElement</span> btn = <span class="cls">WaitUtils</span>.<span class="func">waitForElementVisible</span>(driver, approveButton, 10);
+      <span class="kw">try</span> { btn.<span class="func">click</span>(); }
+      <span class="kw">catch</span> (<span class="cls">Exception</span> e) {
+          ((<span class="cls">JavascriptExecutor</span>) driver).<span class="func">executeScript</span>(<span class="str">"arguments[0].click();"</span>, btn);
+      }
+  }</td>
+                        <td class="desc-col">Waits up to 10 seconds for the Approve button, clicks it, and sends the approval decision to the system.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public void</span> <span class="func">clickNeedsRevision</span>() {
+      <span class="cls">WebElement</span> btn = <span class="cls">WaitUtils</span>.<span class="func">waitForElementVisible</span>(driver, reviseButton, 10);
+      <span class="kw">try</span> { btn.<span class="func">click</span>(); }
+      <span class="kw">catch</span> (<span class="cls">Exception</span> e) {
+          ((<span class="cls">JavascriptExecutor</span>) driver).<span class="func">executeScript</span>(<span class="str">"arguments[0].click();"</span>, btn);
+      }
+  }</td>
+                        <td class="desc-col">Clicks the "Needs Revision" button to return the idea to the pod for changes.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public void</span> <span class="func">clickReject</span>() {
+      <span class="cls">WebElement</span> btn = <span class="cls">WaitUtils</span>.<span class="func">waitForElementVisible</span>(driver, rejectButton, 10);
+      <span class="kw">try</span> { btn.<span class="func">click</span>(); }
+      <span class="kw">catch</span> (<span class="cls">Exception</span> e) {
+          ((<span class="cls">JavascriptExecutor</span>) driver).<span class="func">executeScript</span>(<span class="str">"arguments[0].click();"</span>, btn);
+      }
+  }</td>
+                        <td class="desc-col">Clicks the "Reject" button to finalize rejection of the submission.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 5: TRAINERREVIEWTEST SIDE-BY-SIDE -->
+        <section id="trainertest-sidebyside">
+            <h2 class="section-heading">5. TrainerReviewTest.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/test/java/com/example/tests/TrainerReviewTest.java</span>
+            <p><strong>What this file is doing:</strong> This is the test script class containing the 5 automated test methods for the Trainer Review module. Before every test, it automatically authenticates as Trainer and navigates to the reviews queue.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="kw">public class</span> <span class="cls">TrainerReviewTest</span> <span class="kw">extends</span> <span class="cls">BaseTest</span> {</td>
+                        <td class="desc-col">Extends <code class="inline">BaseTest</code> to inherit automatic browser startup (<code class="inline">setUp</code>) and shutdown (<code class="inline">tearDown</code>).</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private</span> <span class="cls">ReviewsPage</span> reviewsPage;</td>
+                        <td class="desc-col">Declares a reference to the <code class="inline">ReviewsPage</code> Page Object to use across test methods.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@BeforeMethod</span>
+  <span class="kw">public void</span> <span class="func">loginAsTrainer</span>() {
+      <span class="cls">Map</span>&lt;<span class="cls">String</span>, <span class="cls">String</span>&gt; data = <span class="cls">DataProviders</span>.<span class="func">getTrainerReviewTestCaseData</span>(<span class="str">"TC01"</span>);
+      <span class="cls">LoginPage</span> loginPage = <span class="kw">new</span> <span class="cls">LoginPage</span>(driver);
+      loginPage.<span class="func">login</span>(data.<span class="func">get</span>(<span class="str">"Trainer_Email"</span>), data.<span class="func">get</span>(<span class="str">"Trainer_Password"</span>));
+      reviewsPage = <span class="kw">new</span> <span class="cls">ReviewsPage</span>(driver);
+      reviewsPage.<span class="func">navigateToReviews</span>();
+  }</td>
+                        <td class="desc-col"><strong>Automatic Setup Hook:</strong> Runs before <em>every</em> test method in this class:
+                        1. Fetches trainer credentials from Excel (<code class="inline">TestData.xlsx</code>).
+                        2. Logs into ProjectLens as Trainer.
+                        3. Navigates directly to the <code class="inline">/reviews</code> queue.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 1, description = <span class="str">"TC01: Verify Navigation to Reviews Queue"</span>)
+  <span class="kw">public void</span> <span class="func">testTC01_VerifyNavigationToReviewsQueue</span>() {
+      <span class="cls">Map</span>&lt;<span class="cls">String</span>, <span class="cls">String</span>&gt; data = <span class="cls">DataProviders</span>.<span class="func">getTrainerReviewTestCaseData</span>(<span class="str">"TC01"</span>);
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(driver.<span class="func">getCurrentUrl</span>().<span class="func">contains</span>(data.<span class="func">get</span>(<span class="str">"Expected_Status"</span>)),
+              <span class="str">"URL should contain /reviews"</span>);
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(reviewsPage.<span class="func">isDecisionQueueDisplayed</span>(),
+              <span class="str">"Decision queue should be displayed"</span>);
+  }</td>
+                        <td class="desc-col"><strong>Test Case 1 (Navigation):</strong>
+                        1. Asserts browser URL contains <code class="inline">/reviews</code>.
+                        2. Asserts the "Decision queue" header is rendered on screen.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 2, description = <span class="str">"TC02: Verify Submission Details Display"</span>)
+  <span class="kw">public void</span> <span class="func">testTC02_VerifySubmissionDetailsDisplay</span>() {
+      <span class="kw">if</span> (reviewsPage.<span class="func">getQueueItemCount</span>() &gt; 0) {
+          reviewsPage.<span class="func">selectFirstSubmission</span>();
+          <span class="cls">Assert</span>.<span class="func">assertTrue</span>(reviewsPage.<span class="func">isSubmissionDetailsDisplayed</span>(),
+                  <span class="str">"Submission details panel should be visible"</span>);
+          <span class="cls">Assert</span>.<span class="func">assertFalse</span>(reviewsPage.<span class="func">getProjectTitleText</span>().<span class="func">isEmpty</span>(),
+                  <span class="str">"Project title should be displayed"</span>);
+      } <span class="kw">else</span> {
+          <span class="cls">Assert</span>.<span class="func">assertTrue</span>(reviewsPage.<span class="func">isDecisionQueueDisplayed</span>(),
+                  <span class="str">"Decision queue loaded with current state"</span>);
+      }
+  }</td>
+                        <td class="desc-col"><strong>Test Case 2 (Details Display):</strong>
+                        If items exist in queue:
+                        1. Clicks the first submission.
+                        2. Asserts the details panel appears.
+                        3. Asserts the project title is not blank.
+                        If queue is empty, gracefully asserts the queue is responsive.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 4, description = <span class="str">"TC04: Verify Successful Submission Approval"</span>)
+  <span class="kw">public void</span> <span class="func">testTC04_VerifySuccessfulSubmissionApproval</span>() {
+      <span class="cls">Map</span>&lt;<span class="cls">String</span>, <span class="cls">String</span>&gt; data = <span class="cls">DataProviders</span>.<span class="func">getTrainerReviewTestCaseData</span>(<span class="str">"TC04"</span>);
+      <span class="kw">if</span> (reviewsPage.<span class="func">getQueueItemCount</span>() &gt; 0) {
+          reviewsPage.<span class="func">selectFirstSubmission</span>();
+          reviewsPage.<span class="func">enterComments</span>(data.<span class="func">get</span>(<span class="str">"Comments"</span>));
+          reviewsPage.<span class="func">clickApprove</span>();
+          <span class="cls">Assert</span>.<span class="func">assertTrue</span>(reviewsPage.<span class="func">isDecisionQueueDisplayed</span>(),
+                  <span class="str">"Queue updates after approval decision"</span>);
+      }
+  }</td>
+                        <td class="desc-col"><strong>Test Case 4 (Approval Flow):</strong>
+                        1. Selects pending submission.
+                        2. Fetches feedback comment from Excel and types it.
+                        3. Clicks Approve button.
+                        4. Asserts queue updates successfully.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 5, description = <span class="str">"TC05: Verify Requesting Revision"</span>)
+  <span class="kw">public void</span> <span class="func">testTC05_VerifyRequestingRevision</span>() {
+      <span class="cls">Map</span>&lt;<span class="cls">String</span>, <span class="cls">String</span>&gt; data = <span class="cls">DataProviders</span>.<span class="func">getTrainerReviewTestCaseData</span>(<span class="str">"TC05"</span>);
+      <span class="kw">if</span> (reviewsPage.<span class="func">getQueueItemCount</span>() &gt; 0) {
+          reviewsPage.<span class="func">selectFirstSubmission</span>();
+          reviewsPage.<span class="func">enterComments</span>(data.<span class="func">get</span>(<span class="str">"Comments"</span>));
+          reviewsPage.<span class="func">clickNeedsRevision</span>();
+          <span class="cls">Assert</span>.<span class="func">assertTrue</span>(reviewsPage.<span class="func">isDecisionQueueDisplayed</span>(),
+                  <span class="str">"Decision queue updates after Needs Revision decision"</span>);
+      }
+  }</td>
+                        <td class="desc-col"><strong>Test Case 5 (Revision Request):</strong>
+                        1. Selects submission.
+                        2. Types revision instructions from Excel.
+                        3. Clicks "Needs Revision" button.
+                        4. Asserts status is updated.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 6, description = <span class="str">"TC06: Verify Rejection Flow"</span>)
+  <span class="kw">public void</span> <span class="func">testTC06_VerifyRejectionFlow</span>() {
+      <span class="cls">Map</span>&lt;<span class="cls">String</span>, <span class="cls">String</span>&gt; data = <span class="cls">DataProviders</span>.<span class="func">getTrainerReviewTestCaseData</span>(<span class="str">"TC06"</span>);
+      <span class="kw">if</span> (reviewsPage.<span class="func">getQueueItemCount</span>() &gt; 0) {
+          reviewsPage.<span class="func">selectFirstSubmission</span>();
+          reviewsPage.<span class="func">enterComments</span>(data.<span class="func">get</span>(<span class="str">"Comments"</span>));
+          reviewsPage.<span class="func">clickReject</span>();
+          <span class="cls">Assert</span>.<span class="func">assertTrue</span>(reviewsPage.<span class="func">isDecisionQueueDisplayed</span>(),
+                  <span class="str">"Decision queue updates after rejection"</span>);
+      }
+  }</td>
+                        <td class="desc-col"><strong>Test Case 6 (Rejection Flow):</strong>
+                        1. Selects submission.
+                        2. Enters rejection reason from Excel.
+                        3. Clicks "Reject" button.
+                        4. Asserts rejection is finalized.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 6: BASEPAGE SIDE-BY-SIDE -->
+        <section id="basepage-sidebyside">
+            <h2 class="section-heading">6. BasePage.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/example/pages/BasePage.java</span>
+            <p><strong>What this file is doing:</strong> Serves as the foundation parent class for all Page Objects. Wraps raw Selenium interactions with explicit waits to prevent timing issues.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="kw">protected</span> <span class="cls">WebDriver</span> driver;</td>
+                        <td class="desc-col">Protected reference to the active browser instance, accessible by child page classes.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public</span> <span class="cls">BasePage</span>(<span class="cls">WebDriver</span> driver) {
+    <span class="kw">this</span>.driver = driver;
+}</td>
+                        <td class="desc-col">Constructor: Initializes the WebDriver instance for the page.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">protected void</span> <span class="func">click</span>(<span class="cls">By</span> locator) {
+    <span class="cls">WaitUtils</span>.<span class="func">waitForElementClickable</span>(driver, locator, 10).<span class="func">click</span>();
+}</td>
+                        <td class="desc-col">Waits up to 10 seconds for the element to become clickable before clicking. Eliminates <code class="inline">ElementClickInterceptedException</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">protected void</span> <span class="func">enterText</span>(<span class="cls">By</span> locator, <span class="cls">String</span> text) {
+    <span class="cls">WebElement</span> element = <span class="cls">WaitUtils</span>.<span class="func">waitForElementVisible</span>(driver, locator, 10);
+    element.<span class="func">clear</span>();
+    element.<span class="func">sendKeys</span>(text);
+}</td>
+                        <td class="desc-col">Waits for visibility, clears existing text in the input box, and types the new text.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">protected</span> <span class="cls">String</span> <span class="func">getText</span>(<span class="cls">By</span> locator) {
+    <span class="kw">return</span> <span class="cls">WaitUtils</span>.<span class="func">waitForElementVisible</span>(driver, locator, 10).<span class="func">getText</span>().<span class="func">trim</span>();
+}</td>
+                        <td class="desc-col">Waits for visibility, extracts visible inner text, and removes leading/trailing whitespace.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">protected boolean</span> <span class="func">isDisplayed</span>(<span class="cls">By</span> locator) {
+    <span class="kw">try</span> { <span class="kw">return</span> driver.<span class="func">findElement</span>(locator).<span class="func">isDisplayed</span>(); }
+    <span class="kw">catch</span> (<span class="cls">Exception</span> e) { <span class="kw">return false</span>; }
+}</td>
+                        <td class="desc-col">Safely checks if an element is visible on the page. Returns <code class="inline">false</code> instead of crashing if element doesn't exist.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 7: BASETEST SIDE-BY-SIDE -->
+        <section id="basetest-sidebyside">
+            <h2 class="section-heading">7. BaseTest.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/test/java/com/example/base/BaseTest.java</span>
+            <p><strong>What this file is doing:</strong> Manages browser lifecycle for all test classes using TestNG setup and teardown annotations.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="anno">@Listeners</span>(<span class="cls">TestListener</span>.<span class="kw">class</span>)
+<span class="kw">public class</span> <span class="cls">BaseTest</span> {</td>
+                        <td class="desc-col">Attaches <code class="inline">TestListener</code> to automatically capture test metrics and screenshots into ExtentReports.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">protected</span> <span class="cls">WebDriver</span> driver;</td>
+                        <td class="desc-col">Protected WebDriver reference inherited by all 6 test classes.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@BeforeMethod</span>
+  <span class="kw">public void</span> <span class="func">setUp</span>() {
+      <span class="cls">DriverManager</span>.<span class="func">initDriver</span>();
+      driver = <span class="cls">DriverManager</span>.<span class="func">getDriver</span>();
+      <span class="cls">String</span> baseUrl = <span class="cls">ConfigReader</span>.<span class="func">getProperty</span>(<span class="str">"app.baseUrl"</span>);
+      driver.<span class="func">get</span>(baseUrl);
+  }</td>
+                        <td class="desc-col"><strong>Before every test:</strong>
+                        1. Initializes a clean Chrome browser.
+                        2. Fetches the thread-safe driver instance.
+                        3. Reads the login URL from <code class="inline">config.properties</code>.
+                        4. Navigates the browser to the application login screen.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@AfterMethod</span>(alwaysRun = <span class="kw">true</span>)
+  <span class="kw">public void</span> <span class="func">tearDown</span>() {
+      <span class="cls">DriverManager</span>.<span class="func">quitDriver</span>();
+  }</td>
+                        <td class="desc-col"><strong>After every test:</strong>
+                        Closes the Chrome browser window and terminates the WebDriver process cleanly to free CPU memory. <code class="inline">alwaysRun = true</code> ensures it runs even if the test fails.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 8: DRIVERMANAGER SIDE-BY-SIDE -->
+        <section id="drivermanager-sidebyside">
+            <h2 class="section-heading">8. DriverManager.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/example/utils/DriverManager.java</span>
+            <p><strong>What this file is doing:</strong> Manages browser creation with <code class="inline">ThreadLocal&lt;WebDriver&gt;</code> to ensure thread safety.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="kw">private static final</span> <span class="cls">ThreadLocal</span>&lt;<span class="cls">WebDriver</span>&gt; driverThreadLocal = 
+    <span class="kw">new</span> <span class="cls">ThreadLocal</span>&lt;&gt;();</td>
+                        <td class="desc-col">Stores one WebDriver instance per execution thread so tests running in parallel don't collide.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public static</span> <span class="cls">WebDriver</span> <span class="func">getDriver</span>() {
+    <span class="kw">return</span> driverThreadLocal.<span class="func">get</span>();
+}</td>
+                        <td class="desc-col">Returns the current thread's active browser driver.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="cls">ChromeOptions</span> chromeOptions = <span class="kw">new</span> <span class="cls">ChromeOptions</span>();
+chromeOptions.<span class="func">addArguments</span>(<span class="str">"--window-size=1920,1080"</span>);
+chromeOptions.<span class="func">addArguments</span>(<span class="str">"--no-sandbox"</span>);
+driver = <span class="kw">new</span> <span class="cls">ChromeDriver</span>(chromeOptions);</td>
+                        <td class="desc-col">Configures Google Chrome options and launches the Chrome browser.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">driver.<span class="func">manage</span>().<span class="func">timeouts</span>().<span class="func">implicitlyWait</span>(<span class="cls">Duration</span>.<span class="func">ofSeconds</span>(10));
+driver.<span class="func">manage</span>().<span class="func">window</span>().<span class="func">maximize</span>();</td>
+                        <td class="desc-col">Sets a global 10-second implicit wait and maximizes the browser window to full screen.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public static void</span> <span class="func">quitDriver</span>() {
+    <span class="kw">if</span> (<span class="func">getDriver</span>() != <span class="kw">null</span>) {
+        <span class="func">getDriver</span>().<span class="func">quit</span>();
+        driverThreadLocal.<span class="func">remove</span>();
+    }
+}</td>
+                        <td class="desc-col">Quits browser session and clears the ThreadLocal variable to prevent memory leaks.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 9: CONFIGREADER SIDE-BY-SIDE -->
+        <section id="configreader-sidebyside">
+            <h2 class="section-heading">9. ConfigReader.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/example/utils/ConfigReader.java</span>
+            <p><strong>What this file is doing:</strong> Reads key-value configuration values from <code class="inline">src/test/resources/config/config.properties</code>.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="kw">private static</span> <span class="cls">Properties</span> properties;</td>
+                        <td class="desc-col">Static container that stores all settings loaded from the properties file.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">static</span> {
+    <span class="cls">FileInputStream</span> fis = <span class="kw">new</span> <span class="cls">FileInputStream</span>(<span class="str">"src/test/resources/config/config.properties"</span>);
+    properties = <span class="kw">new</span> <span class="cls">Properties</span>();
+    properties.<span class="func">load</span>(fis);
+}</td>
+                        <td class="desc-col">Static block: Runs automatically when the class loads into memory, opening and loading the <code class="inline">config.properties</code> file.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public static</span> <span class="cls">String</span> <span class="func">getProperty</span>(<span class="cls">String</span> key) {
+    <span class="cls">String</span> val = properties.<span class="func">getProperty</span>(key);
+    <span class="kw">return</span> val.<span class="func">trim</span>();
+}</td>
+                        <td class="desc-col">Looks up any property by key (e.g. <code class="inline">getProperty("browser")</code> returns <code class="inline">"chrome"</code>).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 10: WAITUTILS SIDE-BY-SIDE -->
+        <section id="waitutils-sidebyside">
+            <h2 class="section-heading">10. WaitUtils.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/example/utils/WaitUtils.java</span>
+            <p><strong>What this file is doing:</strong> Provides explicit synchronization using Selenium's <code class="inline">WebDriverWait</code>.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="kw">public static</span> <span class="cls">WebElement</span> <span class="func">waitForElementVisible</span>(
+    <span class="cls">WebDriver</span> driver, <span class="cls">By</span> locator, <span class="kw">int</span> timeoutSeconds) {
+    <span class="cls">WebDriverWait</span> wait = <span class="kw">new</span> <span class="cls">WebDriverWait</span>(driver, <span class="cls">Duration</span>.<span class="func">ofSeconds</span>(timeoutSeconds));
+    <span class="kw">return</span> wait.<span class="func">until</span>(<span class="cls">ExpectedConditions</span>.<span class="func">visibilityOfElementLocated</span>(locator));
+}</td>
+                        <td class="desc-col">Waits dynamically up to <code class="inline">timeoutSeconds</code> until the element appears on the DOM and has width/height. If it appears in 1 second, it moves on immediately without wasting time!</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public static</span> <span class="cls">WebElement</span> <span class="func">waitForElementClickable</span>(
+    <span class="cls">WebDriver</span> driver, <span class="cls">By</span> locator, <span class="kw">int</span> timeoutSeconds) {
+    <span class="cls">WebDriverWait</span> wait = <span class="kw">new</span> <span class="cls">WebDriverWait</span>(driver, <span class="cls">Duration</span>.<span class="func">ofSeconds</span>(timeoutSeconds));
+    <span class="kw">return</span> wait.<span class="func">until</span>(<span class="cls">ExpectedConditions</span>.<span class="func">elementToBeClickable</span>(locator));
+}</td>
+                        <td class="desc-col">Waits until element is visible AND enabled so it can receive clicks.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public static boolean</span> <span class="func">waitForUrlContains</span>(
+    <span class="cls">WebDriver</span> driver, <span class="cls">String</span> fraction, <span class="kw">int</span> timeoutSeconds) {
+    <span class="cls">WebDriverWait</span> wait = <span class="kw">new</span> <span class="cls">WebDriverWait</span>(driver, <span class="cls">Duration</span>.<span class="func">ofSeconds</span>(timeoutSeconds));
+    <span class="kw">return</span> wait.<span class="func">until</span>(<span class="cls">ExpectedConditions</span>.<span class="func">urlContains</span>(fraction));
+}</td>
+                        <td class="desc-col">Waits until the current browser URL changes to contain a specific path (e.g. <code class="inline">"reviews"</code>).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 11: EXCELREADER SIDE-BY-SIDE -->
+        <section id="excelreader-sidebyside">
+            <h2 class="section-heading">11. ExcelReader.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/example/utils/ExcelReader.java</span>
+            <p><strong>What this file is doing:</strong> Reads test data from <code class="inline">TestData.xlsx</code> using Apache POI.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="cls">Workbook</span> workbook = <span class="kw">new</span> <span class="cls">XSSFWorkbook</span>(fis);</td>
+                        <td class="desc-col">Opens the Excel <code class="inline">.xlsx</code> workbook file.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="cls">Sheet</span> sheet = workbook.<span class="func">getSheet</span>(sheetName);</td>
+                        <td class="desc-col">Selects the specific sheet by name (e.g. <code class="inline">"TrainerReviewWorkflow"</code>).</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">for</span> (<span class="kw">int</span> r = 1; r &lt;= rowCount; r++) { ... }</td>
+                        <td class="desc-col">Loops through every row in the spreadsheet, reading cell values into a Java Map of column headers to values.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public</span> <span class="cls">Map</span>&lt;<span class="cls">String</span>, <span class="cls">String</span>&gt; <span class="func">getTestCaseData</span>(<span class="cls">String</span> sheetName, <span class="cls">String</span> testCaseId) { ... }</td>
+                        <td class="desc-col">Finds and returns the exact data row matching a specific <code class="inline">TC_ID</code> (e.g. <code class="inline">"TC01"</code>).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 12: DATAPROVIDERS SIDE-BY-SIDE -->
+        <section id="dataproviders-sidebyside">
+            <h2 class="section-heading">12. DataProviders.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/example/utils/DataProviders.java</span>
+            <p><strong>What this file is doing:</strong> Acts as the bridge between Apache POI's <code class="inline">ExcelReader</code> and TestNG tests.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="kw">public static</span> <span class="cls">Map</span>&lt;<span class="cls">String</span>, <span class="cls">String</span>&gt; <span class="func">getTrainerReviewTestCaseData</span>(<span class="cls">String</span> tcId) {
+    <span class="cls">ExcelReader</span> excel = <span class="kw">new</span> <span class="cls">ExcelReader</span>(EXCEL_PATH);
+    <span class="kw">return</span> excel.<span class="func">getTestCaseData</span>(<span class="str">"TrainerReviewWorkflow"</span>, tcId);
+}</td>
+                        <td class="desc-col">Reads and returns the exact test data row for the Trainer Review module from sheet <code class="inline">"TrainerReviewWorkflow"</code> in <code class="inline">TestData.xlsx</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="anno">@DataProvider</span>(name = <span class="str">"loginCredentialsDDT"</span>)
+<span class="kw">public static</span> <span class="cls">Object</span>[][] <span class="func">getLoginCredentialsData</span>() { ... }</td>
+                        <td class="desc-col">TestNG DataProvider that converts all Excel rows into an <code class="inline">Object[][]</code> matrix to execute a test repeatedly with different credentials.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 13: REPORTMANAGER SIDE-BY-SIDE -->
+        <section id="reportmanager-sidebyside">
+            <h2 class="section-heading">13. ReportManager.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/example/utils/ReportManager.java</span>
+            <p><strong>What this file is doing:</strong> Initializes the ExtentReports engine and saves the output to <code class="inline">test-output/ExecutionReport.html</code>.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="cls">ExtentSparkReporter</span> spark = 
+    <span class="kw">new</span> <span class="cls">ExtentSparkReporter</span>(<span class="str">"test-output/ExecutionReport.html"</span>);</td>
+                        <td class="desc-col">Tells ExtentReports to generate a modern Spark-themed HTML file at <code class="inline">test-output/ExecutionReport.html</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">extent = <span class="kw">new</span> <span class="cls">ExtentReports</span>();
+extent.<span class="func">attachReporter</span>(spark);
+extent.<span class="func">setSystemInfo</span>(<span class="str">"Application"</span>, <span class="str">"ProjectLens"</span>);
+extent.<span class="func">setSystemInfo</span>(<span class="str">"Browser"</span>, <span class="str">"CHROME"</span>);</td>
+                        <td class="desc-col">Creates the ExtentReports object, attaches the Spark HTML reporter, and records 3 basic environment info lines.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public static synchronized void</span> <span class="func">flush</span>() {
+    <span class="kw">if</span> (extent != <span class="kw">null</span>) { extent.<span class="func">flush</span>(); }
+}</td>
+                        <td class="desc-col">Writes all logged test results and screenshots to disk, finalizing the HTML file.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 14: TESTLISTENER SIDE-BY-SIDE -->
+        <section id="testlistener-sidebyside">
+            <h2 class="section-heading">14. TestListener.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/test/java/com/example/listeners/TestListener.java</span>
+            <p><strong>What this file is doing:</strong> Implements TestNG's <code class="inline">ITestListener</code> to log test events into ExtentReports.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="kw">public void</span> <span class="func">onTestStart</span>(<span class="cls">ITestResult</span> result) {
+    <span class="cls">ExtentTest</span> test = <span class="cls">ReportManager</span>.<span class="func">getInstance</span>().<span class="func">createTest</span>(testName);
+    <span class="cls">ReportManager</span>.<span class="func">setTest</span>(test);
+    test.<span class="func">assignCategory</span>(formatModuleName(className));
+}</td>
+                        <td class="desc-col">When a test begins, creates a new entry in ExtentReports and categorizes it under its module (e.g. <em>Trainer Review Module</em>).</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public void</span> <span class="func">onTestSuccess</span>(<span class="cls">ITestResult</span> result) {
+    <span class="cls">ReportManager</span>.<span class="func">getTest</span>().<span class="func">pass</span>(<span class="str">"Test passed successfully"</span>);
+}</td>
+                        <td class="desc-col">When an assertion passes, marks the test as green PASS in the report.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public void</span> <span class="func">onTestFailure</span>(<span class="cls">ITestResult</span> result) {
+    <span class="cls">ReportManager</span>.<span class="func">getTest</span>().<span class="func">fail</span>(result.<span class="func">getThrowable</span>());
+    <span class="cls">String</span> base64 = ((<span class="cls">TakesScreenshot</span>) driver).<span class="func">getScreenshotAs</span>(<span class="cls">OutputType</span>.BASE64);
+    <span class="cls">ReportManager</span>.<span class="func">getTest</span>().<span class="func">fail</span>(<span class="str">"Failure Screenshot"</span>,
+        <span class="cls">MediaEntityBuilder</span>.<span class="func">createScreenCaptureFromBase64String</span>(base64).<span class="func">build</span>());
+}</td>
+                        <td class="desc-col">When a test fails, logs the error stack trace, takes a screenshot of the browser, and embeds the screenshot directly into the HTML report!</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public void</span> <span class="func">onFinish</span>(<span class="cls">ITestContext</span> context) {
+    <span class="cls">ReportManager</span>.<span class="func">flush</span>();
+}</td>
+                        <td class="desc-col">When all tests finish running, flushes the report to disk.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 15: BUILD CONFIG -->
+        <section id="pom-sidebyside">
+            <h2 class="section-heading">15. pom.xml & testng.xml</h2>
+
+            <h3 class="sub-heading">pom.xml (Essential Dependencies & Surefire Plugin)</h3>
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>XML Configuration</th>
+                        <th>What It Does in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col">&lt;dependency&gt;
+    &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;
+    &lt;artifactId&gt;selenium-java&lt;/artifactId&gt;
+    &lt;version&gt;4.25.0&lt;/version&gt;
+&lt;/dependency&gt;</td>
+                        <td class="desc-col">Downloads Selenium WebDriver 4 for controlling Google Chrome.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">&lt;dependency&gt;
+    &lt;groupId&gt;org.testng&lt;/groupId&gt;
+    &lt;artifactId&gt;testng&lt;/artifactId&gt;
+    &lt;version&gt;7.10.2&lt;/version&gt;
+&lt;/dependency&gt;</td>
+                        <td class="desc-col">Downloads TestNG test framework for assertions and test runner annotations.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+    &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;
+    &lt;version&gt;5.3.0&lt;/version&gt;
+&lt;/dependency&gt;</td>
+                        <td class="desc-col">Downloads Apache POI for reading <code class="inline">TestData.xlsx</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">&lt;dependency&gt;
+    &lt;groupId&gt;com.aventstack&lt;/groupId&gt;
+    &lt;artifactId&gt;extentreports&lt;/artifactId&gt;
+    &lt;version&gt;5.1.2&lt;/version&gt;
+&lt;/dependency&gt;</td>
+                        <td class="desc-col">Downloads ExtentReports library for generating the HTML report.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">&lt;property&gt;
+    &lt;name&gt;usedefaultlisteners&lt;/name&gt;
+    &lt;value&gt;false&lt;/value&gt;
+&lt;/property&gt;</td>
+                        <td class="desc-col">Disables default TestNG HTML reports so ONLY ExtentReports is created!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 16: INTERVIEW PITCH -->
+        <section id="speech" style="background: #f0fdf4; border: 2px solid #16a34a;">
+            <h2 class="section-heading" style="color: #15803d;">🏆 16. Word-for-Word Interview Pitch</h2>
+
+            <div class="callout callout-tip" style="background: white; border-left-color: #16a34a; font-size: 1rem;">
+                <p><strong>When the interviewer says:</strong> <em>"Tell me about your project and what you did."</em></p>
+                <hr style="margin: 12px 0; border: none; border-top: 1px solid #e2e8f0;">
+                <p><em>"I automated the <strong>ProjectLens</strong> web application using a <strong>Selenium WebDriver 4 + TestNG Page Object Model</strong> framework built in <strong>Java 17</strong>."</em></p>
+
+                <p><em>"My primary responsibility was automating the <strong>Trainer Review Module</strong>. The Trainer is the administrative evaluator who reviews student project ideas. I automated logging in as a Trainer, navigating to the decision queue, inspecting project details (alignment scores, problem statements, and tech stacks), and submitting evaluation decisions like <strong>Approve</strong>, <strong>Needs Revision</strong>, and <strong>Reject</strong> with comments."</em></p>
+
+                <p><em>"Our framework uses <strong>Apache POI</strong> for Data-Driven Testing from Excel, <strong>WebDriverWait</strong> explicit waits for synchronization, and <strong>ExtentReports 5</strong> via TestNG listeners to generate a clean HTML report with failure screenshots."</em></p>
+            </div>
+        </section>
+
+        <!-- SECTION 17: TOP 15 Q&A -->
+        <section id="interview-qa">
+            <h2 class="section-heading">17. Top 15 Selenium Interview Questions & Answers</h2>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q1: Why did you use Page Object Model (POM)?</h4>
+                <p><em>"POM separates page locators and actions into Page classes, away from test assertions. If UI changes occur, we only update the locator in one place without breaking multiple tests."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q2: What is the difference between findElement() and findElements()?</h4>
+                <p><em>"<code class="inline">findElement()</code> returns a single element and throws <code class="inline">NoSuchElementException</code> if missing. <code class="inline">findElements()</code> returns a list and simply returns an empty list if no elements match."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q3: How do you handle waits in your framework?</h4>
+                <p><em>"We use Explicit Waits (<code class="inline">WebDriverWait</code>) in <code class="inline">WaitUtils.java</code> with conditions like <code class="inline">visibilityOfElementLocated</code> and <code class="inline">elementToBeClickable</code> instead of hardcoded sleeps."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q4: Why did you use ThreadLocal in DriverManager?</h4>
+                <p><em>"ThreadLocal gives each running test thread its own separate WebDriver instance, preventing collisions when running tests in parallel."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q5: How does your framework capture screenshots on failure?</h4>
+                <p><em>"In <code class="inline">TestListener.java</code>'s <code class="inline">onTestFailure()</code> callback, we cast driver to <code class="inline">TakesScreenshot</code>, capture the screenshot as Base64, and embed it into ExtentReports."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q6: What is the difference between @BeforeMethod and @BeforeClass?</h4>
+                <p><em>"<code class="inline">@BeforeMethod</code> runs before every single test method (used to open a fresh browser in <code class="inline">BaseTest</code>). <code class="inline">@BeforeClass</code> runs only once before the whole class starts."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q7: What does -D mean in Maven commands like mvn test -Dtest=TrainerReviewTest?</h4>
+                <p><em>"<code class="inline">-D</code> defines a Java System Property. It tells Maven's Surefire plugin to run only that specific test class instead of the entire suite."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q8: How did you implement Data-Driven Testing (DDT)?</h4>
+                <p><em>"We use Apache POI in <code class="inline">ExcelReader.java</code> to read rows from <code class="inline">TestData.xlsx</code>. TestNG's <code class="inline">@DataProvider</code> in <code class="inline">DataProviders.java</code> feeds that data into our tests."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q9: How do you handle elements that cannot be clicked normally?</h4>
+                <p><em>"We use <code class="inline">JavascriptExecutor</code>: <br><code class="inline">((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);</code><br>This directly triggers the DOM click event."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q10: What is Hard Assert vs Soft Assert?</h4>
+                <p><em>"Hard Assert stops test execution immediately if the condition fails. Soft Assert records the failure and continues executing the remaining steps."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q11: What challenges did you face in Trainer Review module?</h4>
+                <p><em>"Asynchronous queue loading: elements took time to render after page load. I solved it by wrapping interactions with explicit waits in <code class="inline">WaitUtils</code>."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q12: How do you run tests in headless mode?</h4>
+                <p><em>"In <code class="inline">config.properties</code>, set <code class="inline">headless=true</code>. <code class="inline">DriverManager.java</code> adds <code class="inline">--headless=new</code> to ChromeOptions so tests run in background without GUI."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q13: How do you run only the Trainer Review module?</h4>
+                <p><em>"Run command: <code class="inline">mvn test -Dtest=TrainerReviewTest</code>"</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q14: How do you run the full test suite?</h4>
+                <p><em>"Run command: <code class="inline">mvn test</code> or double-click <code class="inline">run-all.bat</code>."</em></p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #0284c7;">
+                <h4>Q15: Where is the execution report generated?</h4>
+                <p><em>"It is saved at <code class="inline">test-output/ExecutionReport.html</code> and can be opened in any web browser."</em></p>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

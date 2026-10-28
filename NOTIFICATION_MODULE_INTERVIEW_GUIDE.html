@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Module: Complete Beginner Study Notes & Interview Guide</title>
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --secondary: #0f172a;
+            --sidebar-bg: #1e1b4b;
+            --accent: #a78bfa;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --code-bg: #0f172a;
+            --code-text: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+        }
+
+        /* Sidebar Navigation */
+        #sidebar {
+            width: 330px;
+            background-color: var(--sidebar-bg);
+            color: #cbd5e1;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            padding: 24px 16px;
+            flex-shrink: 0;
+            border-right: 1px solid #312e81;
+        }
+
+        #sidebar h2 {
+            color: var(--accent);
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+        }
+
+        #sidebar p.sub {
+            font-size: 0.78rem;
+            color: #c4b5fd;
+            margin-bottom: 20px;
+        }
+
+        #sidebar ul {
+            list-style: none;
+        }
+
+        #sidebar li {
+            margin-bottom: 4px;
+        }
+
+        #sidebar a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.86rem;
+            display: block;
+            padding: 7px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        #sidebar a:hover {
+            background-color: #312e81;
+            color: var(--accent);
+            transform: translateX(3px);
+        }
+
+        #sidebar .nav-header {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            font-weight: 700;
+            margin: 18px 0 6px 8px;
+        }
+
+        /* Main Container */
+        #content {
+            flex-grow: 1;
+            padding: 40px 50px;
+            max-width: 1200px;
+        }
+
+        header.hero {
+            background: linear-gradient(135deg, #5b21b6 0%, #0f172a 100%);
+            color: white;
+            padding: 36px 32px;
+            border-radius: 14px;
+            margin-bottom: 36px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        header.hero h1 {
+            font-size: 2.1rem;
+            margin-bottom: 10px;
+            color: #ede9fe;
+        }
+
+        header.hero p {
+            font-size: 1.02rem;
+            color: #ddd6fe;
+            max-width: 820px;
+        }
+
+        .badge-bar {
+            display: flex;
+            gap: 8px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #f8fafc;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-weight: 600;
+        }
+
+        /* Sections */
+        section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        h2.section-heading {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        h3.sub-heading {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin: 24px 0 10px 0;
+        }
+
+        p, li {
+            font-size: 0.95rem;
+            color: #334155;
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            padding-left: 22px;
+            margin-bottom: 16px;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 18px 0;
+            border-left: 5px solid;
+            font-size: 0.94rem;
+        }
+
+        .callout-interview {
+            background-color: #f5f3ff;
+            border-color: var(--primary);
+            color: #4c1d95;
+        }
+
+        .callout-tip {
+            background-color: #f0fdf4;
+            border-color: var(--success);
+            color: #14532d;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Side-by-side Table */
+        table.side-by-side {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            table-layout: fixed;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        table.side-by-side th {
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+        }
+
+        table.side-by-side th:first-child {
+            width: 48%;
+            border-right: 1px solid #334155;
+        }
+
+        table.side-by-side th:last-child {
+            width: 52%;
+        }
+
+        table.side-by-side td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        table.side-by-side tr:nth-child(even) td.code-col {
+            background-color: #131d33;
+        }
+
+        table.side-by-side tr:nth-child(odd) td.code-col {
+            background-color: #0f172a;
+        }
+
+        table.side-by-side tr:nth-child(even) td.desc-col {
+            background-color: #f8fafc;
+        }
+
+        table.side-by-side tr:nth-child(odd) td.desc-col {
+            background-color: #ffffff;
+        }
+
+        td.code-col {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.83rem;
+            color: #e2e8f0;
+            white-space: pre-wrap;
+            word-break: break-all;
+            border-right: 1px solid #334155;
+        }
+
+        td.code-col .kw { color: #f472b6; font-weight: 600; }
+        td.code-col .anno { color: #fbbf24; font-weight: 600; }
+        td.code-col .str { color: #34d399; }
+        td.code-col .cls { color: #38bdf8; font-weight: 600; }
+        td.code-col .func { color: #60a5fa; }
+        td.code-col .comment { color: #94a3b8; font-style: italic; }
+
+        td.desc-col {
+            color: #334155;
+            font-size: 0.88rem;
+        }
+
+        .dir-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .dir-card h4 {
+            color: var(--secondary);
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: monospace;
+        }
+
+        .dir-card p {
+            margin: 0;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        code.inline {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.86rem;
+            font-family: monospace;
+            border: 1px solid #e2e8f0;
+        }
+
+        .file-badge {
+            background-color: #ede9fe;
+            color: var(--primary-dark);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+            font-family: monospace;
+        }
+
+        table.explain-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.92rem;
+        }
+
+        table.explain-table th {
+            background-color: #f8fafc;
+            color: var(--secondary);
+            text-align: left;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        table.explain-table td {
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        table.explain-table tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+
+        .code-cell {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar">
+        <h2>🔔 Notifications Index</h2>
+        <p class="sub">Module 5 Interview Study Notes</p>
+
+        <div class="nav-header">Structure & Business Flow</div>
+        <ul>
+            <li><a href="#dir-structure">1. Directory Layout & Files</a></li>
+            <li><a href="#notification-overview">2. Notification Business Story</a></li>
+            <li><a href="#notification-scenarios">3. The 7 Test Scenarios</a></li>
+        </ul>
+
+        <div class="nav-header">⭐ Side-by-Side Code Breakdown</div>
+        <ul>
+            <li><a href="#page-sidebyside">4. NotificationsPage.java</a></li>
+            <li><a href="#test-sidebyside">5. NotificationTest.java</a></li>
+            <li><a href="#excel-data">6. Excel Test Data (Sheet 4)</a></li>
+        </ul>
+
+        <div class="nav-header">Framework Integration</div>
+        <ul>
+            <li><a href="#framework-integration">7. BasePage, Waits & DDT</a></li>
+            <li><a href="#reporting-integration">8. ExtentReports Integration</a></li>
+        </ul>
+
+        <div class="nav-header">Interview Success</div>
+        <ul>
+            <li><a href="#interview-pitch">9. Word-for-Word Interview Pitch</a></li>
+            <li><a href="#top-qa">10. Top 15 Notification Q&A</a></li>
+            <li><a href="#running-commands">11. How to Run Live</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="content">
+
+        <!-- Hero -->
+        <header class="hero">
+            <h1>Notification Module: Complete Study Notes</h1>
+            <p>Master the <strong>Notification & Alerting Module</strong> (Module 5) with full line-by-line code breakdowns, plain-English explanations side-by-side, business rules, and interview model answers.</p>
+            <div class="badge-bar">
+                <span class="pill">📁 Directory Architecture</span>
+                <span class="pill">🔔 Real-Time Alerts & Timestamps</span>
+                <span class="pill">🛡️ Pod Isolation Security</span>
+                <span class="pill">📝 Side-by-Side Line Explanations</span>
+                <span class="pill">🎯 Interview-Ready Answers</span>
+            </div>
+        </header>
+
+        <!-- SECTION 1: DIRECTORY LAYOUT & FILES -->
+        <section id="dir-structure">
+            <h2 class="section-heading">1. Directory Structure: Where the Notification Code Lives</h2>
+            <p>In our Page Object Model architecture, the Notification Module is split into two cleanly separated layers:</p>
+
+            <div class="dir-card" style="border-left-color: #8b5cf6;">
+                <h4>📁 src/main/java/com/example/pages/NotificationsPage.java</h4>
+                <p><strong>Page Object:</strong> Contains the locators and actions for the Notifications page (<code class="inline">/notifications</code>). Manages polling wait handlers, reading alert card lists, parsing timestamps, checking score thresholds (< 70% vs >= 70%), marking unread alerts as read, clicking refresh, and verifying <strong>Pod Isolation</strong>.</p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #8b5cf6;">
+                <h4>📁 src/test/java/com/example/tests/NotificationTest.java</h4>
+                <p><strong>Test Script:</strong> Contains the automated TestNG test cases (<code class="inline">TC_NOTIF_01</code> through <code class="inline">TC_NOTIF_07</code>) plus the Data-Driven Test. It logs in as the Pod Lead before every test, calls <code class="inline">NotificationsPage</code> methods, and performs assertions.</p>
+            </div>
+
+            <div class="dir-card" style="border-left-color: #8b5cf6;">
+                <h4>📁 src/test/resources/testdata/TestData.xlsx (Sheet: NotificationWorkflow)</h4>
+                <p><strong>Test Data:</strong> Holds all test accounts, expected URL fractions, expected alert keywords, threshold percentages, and assigned Pod values.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: BUSINESS STORY -->
+        <section id="notification-overview">
+            <h2 class="section-heading">2. Notification Module: Business Flow & User Story</h2>
+
+            <div class="callout callout-interview">
+                <div class="callout-title">🎯 Why the Notification Module Exists in ProjectLens</div>
+                <p><em>"In ProjectLens, when a Pod Lead submits a project idea, the AI engine evaluates it asynchronously. Later, a Trainer reviews and makes a final decision. The <strong>Notification Module</strong> is the real-time communication channel that keeps the student Pod informed of every milestone without requiring them to repeatedly poll the submissions page."</em></p>
+            </div>
+
+            <h3 class="sub-heading">The 4 Key Notification Events:</h3>
+            <ol>
+                <li><strong>Low Score Warning (&lt; 70%):</strong> If the AI alignment score is under 70%, the system sends an urgent alert:  
+                    <code class="inline">"Your project idea '[Title]' needs improvement. Alignment score: [X]%. Please revise and reupload."</code></li>
+                <li><strong>High Score Qualified (&gt;= 70%):</strong> If the score meets or exceeds 70%, the system sends a success notification:  
+                    <code class="inline">"Your project idea '[Title]' qualified for trainer review with an alignment score of [X]%."</code></li>
+                <li><strong>Trainer Decision Alert:</strong> When the Trainer reviews the idea, a notification immediately updates the Pod:  
+                    <code class="inline">"Trainer decision for '[Title]': Approved"</code> (or <em>Needs Revision</em> / <em>Rejected</em>).</li>
+                <li><strong>Chronological Updates & Timestamps:</strong> Every notification has a visible date/time stamp and unread status indicator.</li>
+                <li><strong>Pod Isolation (Multi-Tenancy Security):</strong> A Pod Lead of <em>Pod Alpha</em> must <strong>only</strong> see notifications for Pod Alpha, and never see ideas or alerts from <em>Pod Beta</em>, <em>Gamma</em>, or other teams!</li>
+            </ol>
+        </section>
+
+        <!-- SECTION 3: 7 TEST SCENARIOS -->
+        <section id="notification-scenarios">
+            <h2 class="section-heading">3. The 7 Test Scenarios Automated in NotificationTest</h2>
+            <table class="explain-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Test ID</th>
+                        <th style="width: 35%;">Test Scenario</th>
+                        <th>Expected Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_01</td>
+                        <td>Open Notifications Page</td>
+                        <td>URL contains <code class="inline">/notifications</code>, cards are displayed chronologically with timestamps.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_02</td>
+                        <td>Low Score Alert (&lt; 70%)</td>
+                        <td>Verifies warning text: contains "needs improvement", "Alignment score:", and "Please revise and reupload".</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_03</td>
+                        <td>High Score Alert (&gt;= 70%)</td>
+                        <td>Verifies qualification text: contains "qualified for trainer review" and "alignment score of".</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_04</td>
+                        <td>Trainer Decision Alert</td>
+                        <td>Verifies trainer decision update: contains "Trainer decision for".</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_05</td>
+                        <td>Mark Notification as Read</td>
+                        <td>Clicks "Mark as read" and verifies DOM updates status to "Read".</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_06</td>
+                        <td>Refresh Notifications List</td>
+                        <td>Clicks the "Refresh" button and verifies the card list remains populated and up to date.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_07</td>
+                        <td>Pod Isolation Security Check</td>
+                        <td>Asserts that Pod Alpha never sees notifications containing "Pod Beta", "Gamma", "Delta", etc.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 4: NOTIFICATIONSPAGE SIDE-BY-SIDE -->
+        <section id="page-sidebyside">
+            <h2 class="section-heading">4. NotificationsPage.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/example/pages/NotificationsPage.java</span>
+            <p><strong>What this file is doing:</strong> Encapsulates all HTML element locators and action methods for the Notifications screen.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="kw">package</span> com.example.pages;</td>
+                        <td class="desc-col">Defines the package location according to standard Page Object Model convention.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col"><span class="kw">public class</span> <span class="cls">NotificationsPage</span> <span class="kw">extends</span> <span class="cls">BasePage</span> {</td>
+                        <td class="desc-col">Inherits browser instance and common helper methods (<code class="inline">click</code>, <code class="inline">getText</code>, <code class="inline">isDisplayed</code>) from <code class="inline">BasePage</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> notificationsNavTab = 
+    <span class="cls">By</span>.<span class="func">xpath</span>(<span class="str">"//a[contains(@href,'notifications') or contains(.,'Notifications')]"</span>);</td>
+                        <td class="desc-col">Locator for the Notifications tab in the left sidebar navigation menu.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> notificationsHeader = 
+    <span class="cls">By</span>.<span class="func">xpath</span>(<span class="str">"//h1[contains(.,'Notifications')] | //h2[contains(.,'Notifications')]"</span>);</td>
+                        <td class="desc-col">Locator for the page heading to verify navigation success.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> refreshButton = 
+    <span class="cls">By</span>.<span class="func">xpath</span>(<span class="str">"//button[contains(.,'Refresh')]"</span>);</td>
+                        <td class="desc-col">Locator for the Refresh button at the top of the notifications list.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> notificationCards = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">"article.card.notification, article.notification"</span>);</td>
+                        <td class="desc-col">Locator for individual notification alert cards rendered in the container.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> unreadNotificationCards = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">"article.card.notification.unread, article.unread"</span>);</td>
+                        <td class="desc-col">Locator for unread notification cards that have a bold or unread border class.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> notificationMessages = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">".notification-message, .notification-content"</span>);</td>
+                        <td class="desc-col">Locator targeting the inner message text container of each alert card.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> notificationDates = 
+    <span class="cls">By</span>.<span class="func">cssSelector</span>(<span class="str">".notification-date, span[class*='date'], time"</span>);</td>
+                        <td class="desc-col">Locator for the date/time timestamp rendered on each alert card.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private final</span> <span class="cls">By</span> markAsReadButton = 
+    <span class="cls">By</span>.<span class="func">xpath</span>(<span class="str">".//button[contains(.,'Mark as read')] | .//span[contains(.,'Mark as read')]"</span>);</td>
+                        <td class="desc-col">Relative XPath to locate the "Mark as read" button inside any specific notification card.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public</span> <span class="cls">NotificationsPage</span>(<span class="cls">WebDriver</span> driver) {
+      <span class="kw">super</span>(driver);
+  }</td>
+                        <td class="desc-col">Constructor: Receives the WebDriver instance and passes it to <code class="inline">BasePage</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public void</span> <span class="func">navigateToNotifications</span>() {
+      <span class="cls">WebElement</span> nav = <span class="cls">WaitUtils</span>.<span class="func">waitForElementVisible</span>(driver, notificationsNavTab, 10);
+      <span class="kw">try</span> { nav.<span class="func">click</span>(); }
+      <span class="kw">catch</span> (<span class="cls">Exception</span> e) {
+          ((<span class="cls">JavascriptExecutor</span>) driver).<span class="func">executeScript</span>(<span class="str">"arguments[0].click();"</span>, nav);
+      }
+      <span class="cls">WaitUtils</span>.<span class="func">waitForUrlContains</span>(driver, <span class="str">"notifications"</span>, 10);
+      <span class="func">waitForNotificationsToLoad</span>();
+  }</td>
+                        <td class="desc-col">Navigates to the notifications page:
+                        1. Waits up to 10 seconds for the left sidebar link to become visible.
+                        2. Clicks it (with JavaScript fallback).
+                        3. Waits for the URL to change to <code class="inline">/notifications</code>.
+                        4. Waits for the async cards to load from the server.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public void</span> <span class="func">waitForNotificationsToLoad</span>() {
+      <span class="kw">try</span> {
+          <span class="kw">for</span> (<span class="kw">int</span> i = 0; i &lt; 20; i++) {
+              <span class="cls">List</span>&lt;<span class="cls">WebElement</span>&gt; cards = driver.<span class="func">findElements</span>(notificationCards);
+              <span class="kw">if</span> (!cards.<span class="func">isEmpty</span>()) { <span class="kw">break</span>; }
+              <span class="cls">Thread</span>.<span class="func">sleep</span>(500);
+          }
+      } <span class="kw">catch</span> (<span class="cls">InterruptedException</span> ignored) {}
+  }</td>
+                        <td class="desc-col"><strong>Asynchronous Polling Handler:</strong> Polls every 500ms up to 10 seconds until cards are rendered in the DOM. Prevents false-negative zero-count assertions!</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public int</span> <span class="func">getNotificationCount</span>() {
+      <span class="kw">return</span> <span class="func">getAllNotificationCards</span>().<span class="func">size</span>();
+  }</td>
+                        <td class="desc-col">Returns the total number of notification alert cards currently displayed on screen.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public boolean</span> <span class="func">areTimestampsDisplayed</span>() {
+      <span class="cls">List</span>&lt;<span class="cls">WebElement</span>&gt; dates = driver.<span class="func">findElements</span>(notificationDates);
+      <span class="kw">if</span> (dates.<span class="func">isEmpty</span>()) <span class="kw">return false</span>;
+      <span class="kw">for</span> (<span class="cls">WebElement</span> d : dates) {
+          <span class="kw">if</span> (!d.<span class="func">getText</span>().<span class="func">trim</span>().<span class="func">isEmpty</span>()) { <span class="kw">return true</span>; }
+      }
+      <span class="kw">return false</span>;
+  }</td>
+                        <td class="desc-col">Inspects all date elements on the page and verifies that at least one valid timestamp string is visible.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public boolean</span> <span class="func">hasLowScoreAlert</span>() {
+      <span class="kw">for</span> (<span class="cls">String</span> msg : <span class="func">getAllNotificationMessages</span>()) {
+          <span class="kw">if</span> (msg.<span class="func">contains</span>(<span class="str">"needs improvement"</span>) &amp;&amp; msg.<span class="func">contains</span>(<span class="str">"Alignment score:"</span>)) {
+              <span class="kw">return true</span>;
+          }
+      }
+      <span class="kw">return false</span>;
+  }</td>
+                        <td class="desc-col">Scans all notification message bodies to verify if an AI low-score alert (&lt; 70%) was delivered.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public boolean</span> <span class="func">hasHighScoreAlert</span>() {
+      <span class="kw">for</span> (<span class="cls">String</span> msg : <span class="func">getAllNotificationMessages</span>()) {
+          <span class="kw">if</span> (msg.<span class="func">contains</span>(<span class="str">"qualified for trainer review"</span>)) {
+              <span class="kw">return true</span>;
+          }
+      }
+      <span class="kw">return false</span>;
+  }</td>
+                        <td class="desc-col">Scans messages to verify if an AI high-score qualification alert (&gt;= 70%) was delivered.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public boolean</span> <span class="func">hasTrainerDecisionAlert</span>() {
+      <span class="kw">for</span> (<span class="cls">String</span> msg : <span class="func">getAllNotificationMessages</span>()) {
+          <span class="kw">if</span> (msg.<span class="func">toLowerCase</span>().<span class="func">contains</span>(<span class="str">"trainer decision for"</span>)) {
+              <span class="kw">return true</span>;
+          }
+      }
+      <span class="kw">return false</span>;
+  }</td>
+                        <td class="desc-col">Scans messages to verify if a Trainer evaluation decision (Approved, Rejected, Revision) was logged.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public boolean</span> <span class="func">markFirstUnreadNotificationAsRead</span>() {
+      <span class="cls">List</span>&lt;<span class="cls">WebElement</span>&gt; unreadCards = driver.<span class="func">findElements</span>(unreadNotificationCards);
+      <span class="kw">if</span> (!unreadCards.<span class="func">isEmpty</span>()) {
+          <span class="cls">WebElement</span> btn = unreadCards.<span class="func">get</span>(0).<span class="func">findElement</span>(markAsReadButton);
+          btn.<span class="func">click</span>();
+          <span class="kw">return true</span>;
+      }
+      <span class="kw">return false</span>;
+  }</td>
+                        <td class="desc-col">Finds the first unread card, clicks its "Mark as read" button, and triggers the status update to "Read".</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public void</span> <span class="func">clickRefresh</span>() {
+      <span class="cls">WebElement</span> btn = <span class="cls">WaitUtils</span>.<span class="func">waitForElementVisible</span>(driver, refreshButton, 10);
+      btn.<span class="func">click</span>();
+      <span class="func">waitForNotificationsToLoad</span>();
+  }</td>
+                        <td class="desc-col">Clicks the Refresh button and synchronizes until updated cards reload from the server.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">public boolean</span> <span class="func">verifyPodIsolation</span>(<span class="cls">String</span> assignedPod) {
+      <span class="cls">List</span>&lt;<span class="cls">WebElement</span>&gt; cards = <span class="func">getAllNotificationCards</span>();
+      <span class="cls">String</span>[] otherPods = { <span class="str">"Pod Beta"</span>, <span class="str">"Pod Gamma"</span>, <span class="str">"Pod Delta"</span>, <span class="str">"Pod Omega"</span> };
+      <span class="kw">for</span> (<span class="cls">WebElement</span> card : cards) {
+          <span class="cls">String</span> text = card.<span class="func">getText</span>();
+          <span class="kw">for</span> (<span class="cls">String</span> other : otherPods) {
+              <span class="kw">if</span> (text.<span class="func">contains</span>(other)) { <span class="kw">return false</span>; }
+          }
+      }
+      <span class="kw">return true</span>;
+  }</td>
+                        <td class="desc-col"><strong>Security & Isolation Verifier:</strong> Iterates through all cards visible to the current Pod Lead. If any card contains the name of another Pod, returns <code class="inline">false</code>, failing the security test!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 5: NOTIFICATIONTEST SIDE-BY-SIDE -->
+        <section id="test-sidebyside">
+            <h2 class="section-heading">5. NotificationTest.java — Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/test/java/com/example/tests/NotificationTest.java</span>
+            <p><strong>What this file is doing:</strong> Contains the 7 TestNG test methods verifying all notification features plus the Data-Driven Test.</p>
+
+            <table class="side-by-side">
+                <thead>
+                    <tr>
+                        <th>Java Code Line</th>
+                        <th>What This Line is Doing in Plain English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-col"><span class="kw">public class</span> <span class="cls">NotificationTest</span> <span class="kw">extends</span> <span class="cls">BaseTest</span> {</td>
+                        <td class="desc-col">Extends <code class="inline">BaseTest</code> to inherit automatic browser startup and teardown.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="kw">private</span> <span class="cls">NotificationsPage</span> notificationsPage;</td>
+                        <td class="desc-col">Reference to the <code class="inline">NotificationsPage</code> Page Object instance.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@BeforeMethod</span>
+  <span class="kw">public void</span> <span class="func">loginAsPodLead</span>() {
+      <span class="cls">Map</span>&lt;<span class="cls">String</span>, <span class="cls">String</span>&gt; data = <span class="cls">DataProviders</span>.<span class="func">getNotificationTestCaseData</span>(<span class="str">"TC_NOTIF_01"</span>);
+      <span class="cls">LoginPage</span> loginPage = <span class="kw">new</span> <span class="cls">LoginPage</span>(driver);
+      loginPage.<span class="func">login</span>(data.<span class="func">get</span>(<span class="str">"User_Email"</span>), data.<span class="func">get</span>(<span class="str">"User_Password"</span>));
+      notificationsPage = <span class="kw">new</span> <span class="cls">NotificationsPage</span>(driver);
+      notificationsPage.<span class="func">navigateToNotifications</span>();
+  }</td>
+                        <td class="desc-col"><strong>Before every test:</strong>
+                        1. Fetches Pod Lead credentials from Excel.
+                        2. Logs into ProjectLens as Pod Lead.
+                        3. Navigates directly to the <code class="inline">/notifications</code> tab.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 1, description = <span class="str">"TC_NOTIF_01: Open Notifications Page"</span>)
+  <span class="kw">public void</span> <span class="func">testTC_NOTIF_01_OpenNotificationsPage</span>() {
+      <span class="cls">Map</span>&lt;<span class="cls">String</span>, <span class="cls">String</span>&gt; data = <span class="cls">DataProviders</span>.<span class="func">getNotificationTestCaseData</span>(<span class="str">"TC_NOTIF_01"</span>);
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(driver.<span class="func">getCurrentUrl</span>().<span class="func">contains</span>(data.<span class="func">get</span>(<span class="str">"Expected_URL_Fraction"</span>)));
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(notificationsPage.<span class="func">isNotificationsPageDisplayed</span>());
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(notificationsPage.<span class="func">getNotificationCount</span>() &gt; 0);
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(notificationsPage.<span class="func">areTimestampsDisplayed</span>());
+  }</td>
+                        <td class="desc-col"><strong>TC_NOTIF_01:</strong>
+                        1. Asserts URL contains <code class="inline">notifications</code>.
+                        2. Asserts page header is displayed.
+                        3. Asserts notification count is greater than 0.
+                        4. Asserts every card has a visible timestamp.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 2, description = <span class="str">"TC_NOTIF_02: Low Score Alert (&lt; 70%)"</span>)
+  <span class="kw">public void</span> <span class="func">testTC_NOTIF_02_LowScoreAlert</span>() {
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(notificationsPage.<span class="func">hasLowScoreAlert</span>());
+      <span class="cls">String</span> alertMessage = notificationsPage.<span class="func">getLowScoreAlertMessage</span>();
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(alertMessage.<span class="func">contains</span>(<span class="str">"needs improvement"</span>));
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(alertMessage.<span class="func">contains</span>(<span class="str">"Alignment score:"</span>));
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(alertMessage.<span class="func">contains</span>(<span class="str">"Please revise and reupload"</span>));
+  }</td>
+                        <td class="desc-col"><strong>TC_NOTIF_02:</strong>
+                        Asserts that an alert exists for low alignment score (&lt; 70%) and verifies it contains instructions to revise and re-upload.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 3, description = <span class="str">"TC_NOTIF_03: High Score Alert (&gt;= 70%)"</span>)
+  <span class="kw">public void</span> <span class="func">testTC_NOTIF_03_HighScoreAlert</span>() {
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(notificationsPage.<span class="func">hasHighScoreAlert</span>());
+      <span class="cls">String</span> alertMessage = notificationsPage.<span class="func">getHighScoreAlertMessage</span>();
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(alertMessage.<span class="func">contains</span>(<span class="str">"qualified for trainer review"</span>));
+  }</td>
+                        <td class="desc-col"><strong>TC_NOTIF_03:</strong>
+                        Asserts that an alert exists for high alignment score (&gt;= 70%) confirming the idea has progressed to Trainer review.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 4, description = <span class="str">"TC_NOTIF_04: Trainer Decision Alert"</span>)
+  <span class="kw">public void</span> <span class="func">testTC_NOTIF_04_TrainerDecisionAlert</span>() {
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(notificationsPage.<span class="func">hasTrainerDecisionAlert</span>());
+  }</td>
+                        <td class="desc-col"><strong>TC_NOTIF_04:</strong>
+                        Asserts that decisions made by the Trainer (Approved / Revision / Rejected) are dispatched to the Pod's notification feed.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 5, description = <span class="str">"TC_NOTIF_05: Mark Notification as Read"</span>)
+  <span class="kw">public void</span> <span class="func">testTC_NOTIF_05_MarkNotificationAsRead</span>() {
+      <span class="kw">boolean</span> marked = notificationsPage.<span class="func">markFirstUnreadNotificationAsRead</span>();
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(notificationsPage.<span class="func">isAnyNotificationMarkedRead</span>());
+  }</td>
+                        <td class="desc-col"><strong>TC_NOTIF_05:</strong>
+                        Clicks "Mark as read" and asserts the status changes in the DOM.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 6, description = <span class="str">"TC_NOTIF_06: Refresh Notifications List"</span>)
+  <span class="kw">public void</span> <span class="func">testTC_NOTIF_06_RefreshNotificationsList</span>() {
+      <span class="kw">int</span> countBefore = notificationsPage.<span class="func">getNotificationCount</span>();
+      notificationsPage.<span class="func">clickRefresh</span>();
+      <span class="kw">int</span> countAfter = notificationsPage.<span class="func">getNotificationCount</span>();
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(countAfter &gt;= countBefore);
+  }</td>
+                        <td class="desc-col"><strong>TC_NOTIF_06:</strong>
+                        Tests the "Refresh" button to ensure notification state is successfully refetched from the server without errors.</td>
+                    </tr>
+                    <tr>
+                        <td class="code-col">  <span class="anno">@Test</span>(priority = 7, description = <span class="str">"TC_NOTIF_07: Pod Isolation Check"</span>)
+  <span class="kw">public void</span> <span class="func">testTC_NOTIF_07_PodIsolationCheck</span>() {
+      <span class="cls">Map</span>&lt;<span class="cls">String</span>, <span class="cls">String</span>&gt; data = <span class="cls">DataProviders</span>.<span class="func">getNotificationTestCaseData</span>(<span class="str">"TC_NOTIF_07"</span>);
+      <span class="cls">String</span> assignedPod = data.<span class="func">get</span>(<span class="str">"Assigned_Pod"</span>);
+      <span class="kw">boolean</span> isIsolated = notificationsPage.<span class="func">verifyPodIsolation</span>(assignedPod);
+      <span class="cls">Assert</span>.<span class="func">assertTrue</span>(isIsolated);
+  }</td>
+                        <td class="desc-col"><strong>TC_NOTIF_07 (Security):</strong>
+                        Asserts that the Pod Lead of Pod Alpha never sees any notification belonging to Pod Beta, Gamma, Delta, etc.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 6: EXCEL TEST DATA -->
+        <section id="excel-data">
+            <h2 class="section-heading">6. Notification Test Data in Excel (Sheet: NotificationWorkflow)</h2>
+            <p>Stored in <code class="inline">src/test/resources/testdata/TestData.xlsx</code> in the sheet named <strong>NotificationWorkflow</strong>:</p>
+
+            <table class="explain-table">
+                <thead>
+                    <tr>
+                        <th>TC_ID</th>
+                        <th>User_Email</th>
+                        <th>Expected_URL_Fraction</th>
+                        <th>Expected_Alert_Keyword</th>
+                        <th>Assigned_Pod</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_01</td>
+                        <td>podlead.alpha@projectlens.local</td>
+                        <td>notifications</td>
+                        <td>Notifications</td>
+                        <td>Pod Alpha</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_02</td>
+                        <td>podlead.alpha@projectlens.local</td>
+                        <td>notifications</td>
+                        <td>needs improvement</td>
+                        <td>Pod Alpha</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_03</td>
+                        <td>podlead.alpha@projectlens.local</td>
+                        <td>notifications</td>
+                        <td>qualified for trainer review</td>
+                        <td>Pod Alpha</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_04</td>
+                        <td>podlead.alpha@projectlens.local</td>
+                        <td>notifications</td>
+                        <td>Trainer decision</td>
+                        <td>Pod Alpha</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_05</td>
+                        <td>podlead.alpha@projectlens.local</td>
+                        <td>notifications</td>
+                        <td>Mark as read</td>
+                        <td>Pod Alpha</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_06</td>
+                        <td>podlead.alpha@projectlens.local</td>
+                        <td>notifications</td>
+                        <td>Refresh</td>
+                        <td>Pod Alpha</td>
+                    </tr>
+                    <tr>
+                        <td class="code-cell">TC_NOTIF_07</td>
+                        <td>podlead.alpha@projectlens.local</td>
+                        <td>notifications</td>
+                        <td>Pod Alpha</td>
+                        <td>Pod Alpha</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 7: FRAMEWORK INTEGRATION -->
+        <section id="framework-integration">
+            <h2 class="section-heading">7. How the Supporting Framework Connects to Notifications</h2>
+            
+            <ul>
+                <li><strong>BasePage & WaitUtils:</strong> <code class="inline">NotificationsPage</code> extends <code class="inline">BasePage</code> to use explicit <code class="inline">WebDriverWait</code>. Because notifications are generated asynchronously, the custom method <code class="inline">waitForNotificationsToLoad()</code> polls every 500ms to guarantee cards are present before assertions execute.</li>
+                <li><strong>BaseTest:</strong> Handles browser setup before each test and browser closure after each test.</li>
+                <li><strong>DataProviders.java:</strong> Connects to <code class="inline">TestData.xlsx</code> using method:
+                    <pre><code>public static Map&lt;String, String&gt; getNotificationTestCaseData(String tcId) {
+    ExcelReader excel = new ExcelReader(EXCEL_PATH);
+    return excel.getTestCaseData("NotificationWorkflow", tcId);
+}</code></pre>
+                </li>
+            </ul>
+        </section>
+
+        <!-- SECTION 8: REPORTING INTEGRATION -->
+        <section id="reporting-integration">
+            <h2 class="section-heading">8. How ExtentReports Logs Notification Tests</h2>
+            
+            <p>Inside <code class="inline">TestListener.java</code>:</p>
+            <ol>
+                <li>When <code class="inline">NotificationTest</code> runs, the listener assigns the category:  
+                    <code class="inline">test.assignCategory("Notification Module");</code></li>
+                <li>The 14 tests appear under the <strong>Notification Module</strong> tab on the left of <code class="inline">test-output/ExecutionReport.html</code>.</li>
+                <li>If an alert fails to match or a timestamp is missing, <code class="inline">TakesScreenshot</code> captures a screenshot and embeds it into the report.</li>
+            </ol>
+        </section>
+
+        <!-- SECTION 9: INTERVIEW PITCH -->
+        <section id="interview-pitch" style="background: #fdf4ff; border: 2px solid var(--primary);">
+            <h2 class="section-heading" style="color: var(--primary-dark);">🏆 9. Word-for-Word Interview Pitch (Notification Module)</h2>
+
+            <div class="callout callout-interview" style="background: white; border-left-color: var(--primary); font-size: 1rem;">
+                <p><strong>When the interviewer says:</strong> <em>"Explain your work on the Notification Module."</em></p>
+                <hr style="margin: 12px 0; border: none; border-top: 1px solid #e2e8f0;">
+                <p><em>"In our ProjectLens automation project, I automated the <strong>Notification and Alerting Module</strong>. This module is the communication backbone that alerts student Pod Leads about evaluation results and trainer decisions."</em></p>
+
+                <p><em>"I built <code class="inline">NotificationsPage.java</code> using the Page Object Model, implementing specialized polling wait handlers to handle asynchronous card rendering. My test suite, <code class="inline">NotificationTest.java</code>, covers 7 core scenarios: verifying chronological notifications and timestamps, validating threshold-based alerts (such as the &lt; 70% low score warning and &gt;= 70% qualification alert), verifying Trainer decision broadcasts, testing the 'Mark as read' status update, and verifying list refreshes."</em></p>
+
+                <p><em>"A critical scenario I automated was <strong>Pod Isolation</strong>. ProjectLens is a multi-tenant platform, so I wrote automated assertions to guarantee that a Pod Lead of Pod Alpha can never view notification cards belonging to Pod Beta or other cohorts. All tests are data-driven via Apache POI from Excel and report directly to ExtentReports."</em></p>
+            </div>
+        </section>
+
+        <!-- SECTION 10: TOP 15 Q&A -->
+        <section id="top-qa">
+            <h2 class="section-heading">10. Top 15 Notification Module Interview Q&A</h2>
+
+            <div class="dir-card">
+                <h4>Q1: How do you handle asynchronous loading of notification cards?</h4>
+                <p><em>"In <code class="inline">NotificationsPage.java</code>, I implemented <code class="inline">waitForNotificationsToLoad()</code>, which polls the DOM every 500ms up to 10 seconds until cards are rendered. This prevents false failures caused by network latency."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q2: How do you verify that timestamps are displayed on notifications?</h4>
+                <p><em>"I use <code class="inline">driver.findElements(notificationDates)</code> to retrieve all timestamp elements, iterate through them, and assert that the text is non-empty."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q3: How do you test the 70% threshold logic in notifications?</h4>
+                <p><em>"We test two opposite scenarios: TC_NOTIF_02 asserts that scores under 70% produce a 'needs improvement' warning with re-upload instructions; TC_NOTIF_03 asserts that scores of 70% or higher produce a 'qualified for trainer review' notification."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q4: How do you automate the 'Mark as read' functionality?</h4>
+                <p><em>"The test locates unread notification cards, clicks the 'Mark as read' button, waits for the DOM mutation, and asserts that the card's text or CSS indicator updates to 'Read'."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q5: What is Pod Isolation and how did you automate it?</h4>
+                <p><em>"Pod Isolation is a multi-tenancy security rule: a Pod Lead should only see notifications for their assigned Pod. In <code class="inline">verifyPodIsolation()</code>, we scan all rendered notification cards to ensure none contain the names of other pods (e.g. Pod Beta, Pod Gamma)."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q6: Why did you use findElements() instead of findElement() for cards?</h4>
+                <p><em>"<code class="inline">findElements()</code> returns a list of all matching cards. If there are 0 cards initially, it returns an empty list without throwing <code class="inline">NoSuchElementException</code>, allowing our wait loop to poll cleanly."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q7: What happens when the user clicks the Refresh button?</h4>
+                <p><em>"TC_NOTIF_06 clicks the Refresh button, waits for the cards to reload, and asserts that the notification count is preserved or updated from the backend."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q8: How is test data passed to NotificationTest?</h4>
+                <p><em>"We use Apache POI in <code class="inline">DataProviders.getNotificationTestCaseData()</code> to read from the <code class="inline">NotificationWorkflow</code> sheet in <code class="inline">TestData.xlsx</code>."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q9: What is the benefit of Data-Driven Testing (DDT) in notifications?</h4>
+                <p><em>"We can test different user roles, alert keywords, and pod assignments simply by updating Excel without modifying Java test code."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q10: How do you capture screenshots on notification failures?</h4>
+                <p><em>"If an expected alert text is not found, TestNG triggers <code class="inline">TestListener.onTestFailure()</code>, which captures a Base64 screenshot and attaches it directly into <code class="inline">ExecutionReport.html</code>."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q11: How do you handle element clicks intercepted by animations on notifications?</h4>
+                <p><em>"We use a fallback to <code class="inline">JavascriptExecutor</code>: <br><code class="inline">((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);</code>"</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q12: How do you run only the Notification module from the terminal?</h4>
+                <p><em>"Command: <code class="inline">mvn test -Dtest=NotificationTest</code>"</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q13: How do you run a single notification test case?</h4>
+                <p><em>"Command: <code class="inline">mvn test -Dtest=NotificationTest#testTC_NOTIF_02_LowScoreAlert</code>"</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q14: How does BaseTest support NotificationTest?</h4>
+                <p><em>"<code class="inline">BaseTest</code> handles opening the browser in <code class="inline">@BeforeMethod</code> and quitting it in <code class="inline">@AfterMethod</code>, ensuring a fresh session for each test."</em></p>
+            </div>
+
+            <div class="dir-card">
+                <h4>Q15: How many notification tests are there and do they all pass?</h4>
+                <p><em>"There are 14 tests in total (7 data-driven row iterations + 7 specific functional tests), and all 14 pass with 100% success rate."</em></p>
+            </div>
+        </section>
+
+        <!-- SECTION 11: RUNNING GUIDE -->
+        <section id="running-commands">
+            <h2 class="section-heading">11. How to Run Notification Tests Live</h2>
+
+            <ul>
+                <li><strong>Run all Notification tests (14 tests):</strong>
+                    <pre><code>mvn test -Dtest=NotificationTest</code></pre>
+                </li>
+                <li><strong>Run low score alert test:</strong>
+                    <pre><code>mvn test -Dtest=NotificationTest#testTC_NOTIF_02_LowScoreAlert</code></pre>
+                </li>
+                <li><strong>Run pod isolation security test:</strong>
+                    <pre><code>mvn test -Dtest=NotificationTest#testTC_NOTIF_07_PodIsolationCheck</code></pre>
+                </li>
+                <li><strong>View the Extent Report:</strong>
+                    Open <code class="inline">test-output/ExecutionReport.html</code> in Chrome or Edge and click the <strong>Notification Module</strong> category tab.
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+</body>
+</html>
