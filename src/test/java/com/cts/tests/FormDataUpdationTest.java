@@ -1,12 +1,12 @@
-package com.example.tests;
+package com.cts.tests;
 
-import com.example.base.BaseTest;
-import com.example.pages.DashboardPage;
-import com.example.pages.LoginPage;
-import com.example.pages.ProjectSubmissionPage;
-import com.example.pages.ReviewsPage;
-import com.example.pages.SubmissionsPage;
-import com.example.utils.DataProviders;
+import com.cts.base.BaseTest;
+import com.cts.pages.DashboardPage;
+import com.cts.pages.LoginPage;
+import com.cts.pages.ProjectSubmissionPage;
+import com.cts.pages.ReviewsPage;
+import com.cts.pages.SubmissionsPage;
+import com.cts.utils.DataProviders;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -42,7 +42,7 @@ public class FormDataUpdationTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage(driver);
         if (!loginPage.isLoginPageDisplayed()) {
-            String baseUrl = com.example.utils.ConfigReader.getProperty("app.baseUrl");
+            String baseUrl = com.cts.utils.ConfigReader.getProperty("app.baseUrl");
             driver.get(baseUrl != null ? baseUrl : "http://localhost:3000");
         }
         loginPage.login(email, password);

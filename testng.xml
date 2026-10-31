@@ -2,36 +2,36 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="ProjectLens Automation Suite" parallel="none">
     <listeners>
-        <listener class-name="com.example.listeners.TestListener"/>
+        <listener class-name="com.cts.listeners.TestListener"/>
     </listeners>
     <test name="Login Module Tests">
         <classes>
-            <class name="com.example.tests.LoginTest"/>
+            <class name="com.cts.tests.LoginTest"/>
         </classes>
     </test>
     <test name="Trainer Review Workflow Tests">
         <classes>
-            <class name="com.example.tests.TrainerReviewTest"/>
+            <class name="com.cts.tests.TrainerReviewTest"/>
         </classes>
     </test>
     <test name="Form Validation Module Tests">
         <classes>
-            <class name="com.example.tests.FormValidationTest"/>
+            <class name="com.cts.tests.FormValidationTest"/>
         </classes>
     </test>
     <test name="Notification Module Tests">
         <classes>
-            <class name="com.example.tests.NotificationTest"/>
+            <class name="com.cts.tests.NotificationTest"/>
         </classes>
     </test>
     <test name="Revise Submission Workflow Tests">
         <classes>
-            <class name="com.example.tests.ReviseSubmissionTest"/>
+            <class name="com.cts.tests.ReviseSubmissionTest"/>
         </classes>
     </test>
     <test name="Form Data Updation Module Tests">
         <classes>
-            <class name="com.example.tests.FormDataUpdationTest"/>
+            <class name="com.cts.tests.FormDataUpdationTest"/>
         </classes>
     </test>
 </suite>

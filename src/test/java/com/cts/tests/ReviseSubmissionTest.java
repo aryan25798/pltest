@@ -1,11 +1,11 @@
-package com.example.tests;
+package com.cts.tests;
 
-import com.example.base.BaseTest;
-import com.example.pages.DashboardPage;
-import com.example.pages.LoginPage;
-import com.example.pages.ReviseSubmissionPage;
-import com.example.pages.SubmissionsPage;
-import com.example.utils.DataProviders;
+import com.cts.base.BaseTest;
+import com.cts.pages.DashboardPage;
+import com.cts.pages.LoginPage;
+import com.cts.pages.ReviseSubmissionPage;
+import com.cts.pages.SubmissionsPage;
+import com.cts.utils.DataProviders;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

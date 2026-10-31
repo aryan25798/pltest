@@ -1,8 +1,8 @@
-package com.example.base;
+package com.cts.base;
 
-import com.example.listeners.TestListener;
-import com.example.utils.ConfigReader;
-import com.example.utils.DriverManager;
+import com.cts.listeners.TestListener;
+import com.cts.utils.ConfigReader;
+import com.cts.utils.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

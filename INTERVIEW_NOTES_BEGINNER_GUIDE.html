@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProjectLens Test Automation — Complete Beginner Master Guide</title>
+    <title>ProjectLens Test Automation â€” Complete Beginner Master Guide</title>
     <style>
         :root {
             --primary: #0284c7;
@@ -339,7 +339,7 @@
 
     <!-- Sidebar Navigation -->
     <nav id="sidebar">
-        <h2>📘 Notes Index</h2>
+        <h2>ðŸ“˜ Notes Index</h2>
         <p class="sub">ProjectLens Interview Preparation</p>
 
         <div class="nav-header">Structure & Overview</div>
@@ -348,7 +348,7 @@
             <li><a href="#pom-architecture">2. Page Object Model Flow</a></li>
         </ul>
 
-        <div class="nav-header">⭐ Primary Focus (Trainer Review)</div>
+        <div class="nav-header">â­ Primary Focus (Trainer Review)</div>
         <ul>
             <li><a href="#trainer-overview">3. Trainer Business Story</a></li>
             <li><a href="#reviewspage-sidebyside">4. ReviewsPage.java (Side-by-Side)</a></li>
@@ -384,10 +384,10 @@
             <h1>ProjectLens Automation: Line-by-Line Study Notes</h1>
             <p>Every single line of code in this project is explained side-by-side with its exact plain-English meaning. Specially built for beginners preparing for a Selenium Automation interview.</p>
             <div class="badge-bar">
-                <span class="pill">📁 Full Directory Breakdown</span>
-                <span class="pill">📝 Side-by-Side Line Explanations</span>
-                <span class="pill">⭐ Trainer Review Module Focus</span>
-                <span class="pill">🎯 Interview-Ready Answers</span>
+                <span class="pill">ðŸ“ Full Directory Breakdown</span>
+                <span class="pill">ðŸ“ Side-by-Side Line Explanations</span>
+                <span class="pill">â­ Trainer Review Module Focus</span>
+                <span class="pill">ðŸŽ¯ Interview-Ready Answers</span>
             </div>
         </header>
 
@@ -397,140 +397,140 @@
             <p>Every file in your project has one single, clear responsibility. Here is the exact directory layout and the job of every folder and file:</p>
 
             <div class="dir-card">
-                <h4>📁 src/main/java/com/example/pages/</h4>
+                <h4>ðŸ“ src/main/java/com/cts/pages/</h4>
                 <p><strong>Page Object Classes:</strong> These classes represent the web pages. They contain the page's HTML element locators (<code class="inline">By</code>) and action methods (e.g. typing, clicking). They never contain assertion checks.</p>
             </div>
 
             <div style="margin-left: 24px;">
                 <div class="dir-card" style="border-left-color: #0ea5e9;">
-                    <h4>📄 BasePage.java</h4>
+                    <h4>ðŸ“„ BasePage.java</h4>
                     <p><strong>Common Parent Class:</strong> Provides reusable wrapper methods (<code class="inline">click()</code>, <code class="inline">enterText()</code>, <code class="inline">getText()</code>, <code class="inline">isDisplayed()</code>) with explicit waits so we don't repeat code across pages.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #0284c7; background: #f0f9ff;">
-                    <h4>📄 ReviewsPage.java ⭐ (Your Primary Module)</h4>
+                    <h4>ðŸ“„ ReviewsPage.java â­ (Your Primary Module)</h4>
                     <p><strong>Trainer Review Page Object:</strong> Contains locators for the Decision Queue, project detail panel, comments textarea, and action buttons (<code class="inline">Approve</code>, <code class="inline">Needs Revision</code>, <code class="inline">Reject</code>).</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #0ea5e9;">
-                    <h4>📄 LoginPage.java</h4>
+                    <h4>ðŸ“„ LoginPage.java</h4>
                     <p><strong>Login Page Object:</strong> Locators for email input, password input, show/hide password toggle, and the Sign In button.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #0ea5e9;">
-                    <h4>📄 DashboardPage.java</h4>
+                    <h4>ðŸ“„ DashboardPage.java</h4>
                     <p><strong>Dashboard & Navigation:</strong> Locators and methods to verify page hydration and trigger user <code class="inline">logout()</code>.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #0ea5e9;">
-                    <h4>📄 ProjectSubmissionPage.java</h4>
+                    <h4>ðŸ“„ ProjectSubmissionPage.java</h4>
                     <p><strong>Idea Submission Form:</strong> Locators and actions to submit title, problem statement, objectives, and tech stack.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #0ea5e9;">
-                    <h4>📄 SubmissionsPage.java</h4>
+                    <h4>ðŸ“„ SubmissionsPage.java</h4>
                     <p><strong>Submissions List:</strong> Inspects submitted project cards, AI alignment percentage scores, and evaluation details.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #0ea5e9;">
-                    <h4>📄 ReviseSubmissionPage.java</h4>
+                    <h4>ðŸ“„ ReviseSubmissionPage.java</h4>
                     <p><strong>Revision Workflow:</strong> Handles editing existing submissions and triggering re-upload evaluation.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #0ea5e9;">
-                    <h4>📄 NotificationsPage.java</h4>
+                    <h4>ðŸ“„ NotificationsPage.java</h4>
                     <p><strong>System Alerts:</strong> Reads real-time alert notifications, marks them as read, and verifies timestamps.</p>
                 </div>
             </div>
 
             <div class="dir-card">
-                <h4>📁 src/main/java/com/example/utils/</h4>
+                <h4>ðŸ“ src/main/java/com/cts/utils/</h4>
                 <p><strong>Utility Helper Classes:</strong> Non-UI support tools for browser creation, reading config files, reading Excel files, and generating reports.</p>
             </div>
 
             <div style="margin-left: 24px;">
                 <div class="dir-card" style="border-left-color: #10b981;">
-                    <h4>📄 DriverManager.java</h4>
+                    <h4>ðŸ“„ DriverManager.java</h4>
                     <p><strong>Browser Lifecycle Manager:</strong> Launches Chrome/Edge/Firefox with <code class="inline">ThreadLocal&lt;WebDriver&gt;</code> to ensure thread safety during parallel runs.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #10b981;">
-                    <h4>📄 ConfigReader.java</h4>
+                    <h4>ðŸ“„ ConfigReader.java</h4>
                     <p><strong>Configuration Loader:</strong> Reads key-value pairs from <code class="inline">config.properties</code> (e.g. <code class="inline">app.baseUrl</code>, <code class="inline">browser</code>).</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #10b981;">
-                    <h4>📄 WaitUtils.java</h4>
+                    <h4>ðŸ“„ WaitUtils.java</h4>
                     <p><strong>Explicit Wait Synchronization:</strong> Uses <code class="inline">WebDriverWait</code> with conditions like <code class="inline">visibilityOfElementLocated</code> and <code class="inline">elementToBeClickable</code>.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #10b981;">
-                    <h4>📄 ExcelReader.java</h4>
+                    <h4>ðŸ“„ ExcelReader.java</h4>
                     <p><strong>Apache POI Excel Parser:</strong> Reads tabular rows from <code class="inline">TestData.xlsx</code> into Java <code class="inline">List&lt;Map&lt;String, String&gt;&gt;</code>.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #10b981;">
-                    <h4>📄 DataProviders.java</h4>
+                    <h4>ðŸ“„ DataProviders.java</h4>
                     <p><strong>TestNG Data Feeder:</strong> Contains <code class="inline">@DataProvider</code> methods that inject Excel rows into test cases dynamically.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #10b981;">
-                    <h4>📄 ReportManager.java</h4>
+                    <h4>ðŸ“„ ReportManager.java</h4>
                     <p><strong>ExtentReports Manager:</strong> Configures and initializes the HTML report file at <code class="inline">test-output/ExecutionReport.html</code>.</p>
                 </div>
             </div>
 
             <div class="dir-card">
-                <h4>📁 src/test/java/com/example/</h4>
+                <h4>ðŸ“ src/test/java/com/cts/</h4>
                 <p><strong>Test Scripts & Listeners:</strong> All executable test logic using TestNG assertions.</p>
             </div>
 
             <div style="margin-left: 24px;">
                 <div class="dir-card" style="border-left-color: #8b5cf6;">
-                    <h4>📄 base/BaseTest.java</h4>
+                    <h4>ðŸ“„ base/BaseTest.java</h4>
                     <p><strong>Test Suite Superclass:</strong> Contains <code class="inline">@BeforeMethod</code> (launches browser and opens URL) and <code class="inline">@AfterMethod</code> (closes browser).</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #8b5cf6;">
-                    <h4>📄 listeners/TestListener.java</h4>
+                    <h4>ðŸ“„ listeners/TestListener.java</h4>
                     <p><strong>TestNG Event Listener:</strong> Listens for test success/failure, attaches failure screenshots, and writes ExtentReports.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #8b5cf6; background: #fdf4ff;">
-                    <h4>📄 tests/TrainerReviewTest.java ⭐ (Your Primary Module)</h4>
+                    <h4>ðŸ“„ tests/TrainerReviewTest.java â­ (Your Primary Module)</h4>
                     <p><strong>Trainer Review Test Cases:</strong> 5 comprehensive tests: Navigation, Details panel display, Approve decision, Needs Revision decision, and Reject decision.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #8b5cf6;">
-                    <h4>📄 tests/LoginTest.java</h4>
+                    <h4>ðŸ“„ tests/LoginTest.java</h4>
                     <p><strong>Authentication Tests:</strong> Valid login, invalid login (DDT), password masking, protected routes, and logout.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #8b5cf6;">
-                    <h4>📄 tests/FormValidationTest.java</h4>
+                    <h4>ðŸ“„ tests/FormValidationTest.java</h4>
                     <p><strong>Submission Validation Tests:</strong> Cohort criteria, 70% alignment requirement, and missing field alerts.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #8b5cf6;">
-                    <h4>📄 tests/NotificationTest.java</h4>
+                    <h4>ðŸ“„ tests/NotificationTest.java</h4>
                     <p><strong>Notification Tests:</strong> Real-time alerts, low/high score notifications, read status, and pod isolation.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #8b5cf6;">
-                    <h4>📄 tests/ReviseSubmissionTest.java</h4>
+                    <h4>ðŸ“„ tests/ReviseSubmissionTest.java</h4>
                     <p><strong>Revision Tests:</strong> Editable field state, re-upload analysis, and submission preservation.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #8b5cf6;">
-                    <h4>📄 tests/FormDataUpdationTest.java</h4>
+                    <h4>ðŸ“„ tests/FormDataUpdationTest.java</h4>
                     <p><strong>Persistence Tests (FDU_01 to FDU_10):</strong> Data persistence across roles (Lead, Member, Trainer), page refresh, and re-login.</p>
                 </div>
             </div>
 
             <div class="dir-card">
-                <h4>📁 Configuration & Test Data</h4>
+                <h4>ðŸ“ Configuration & Test Data</h4>
             </div>
 
             <div style="margin-left: 24px;">
                 <div class="dir-card" style="border-left-color: #f59e0b;">
-                    <h4>📄 src/test/resources/config/config.properties</h4>
+                    <h4>ðŸ“„ src/test/resources/config/config.properties</h4>
                     <p>Application base URL (<code class="inline">https://project-lens-beta.vercel.app/login</code>), browser name, and wait timeouts.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #f59e0b;">
-                    <h4>📄 src/test/resources/testdata/TestData.xlsx</h4>
+                    <h4>ðŸ“„ src/test/resources/testdata/TestData.xlsx</h4>
                     <p>Excel workbook containing 7 separate sheets with test data for every scenario.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #f59e0b;">
-                    <h4>📄 testng.xml</h4>
+                    <h4>ðŸ“„ testng.xml</h4>
                     <p>Master suite XML file listing all 6 test classes to execute.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #f59e0b;">
-                    <h4>📄 pom.xml</h4>
+                    <h4>ðŸ“„ pom.xml</h4>
                     <p>Maven dependencies (Selenium, TestNG, POI, ExtentReports) and Surefire plugin configuration.</p>
                 </div>
                 <div class="dir-card" style="border-left-color: #f59e0b;">
-                    <h4>📄 run-all.bat</h4>
+                    <h4>ðŸ“„ run-all.bat</h4>
                     <p>Windows 1-click execution script that triggers <code class="inline">mvn test</code>.</p>
                 </div>
             </div>
@@ -542,7 +542,7 @@
             <p>Here is how control flows when a test runs:</p>
 
             <div class="callout callout-interview">
-                <div class="callout-title">🔄 The 3-Step Execution Cycle</div>
+                <div class="callout-title">ðŸ”„ The 3-Step Execution Cycle</div>
                 <ol>
                     <li><strong>BaseTest (@BeforeMethod):</strong> Launches Chrome browser, maximizes the window, and opens the login URL.</li>
                     <li><strong>Test Method (e.g. TrainerReviewTest):</strong>
@@ -560,10 +560,10 @@
 
         <!-- SECTION 3: TRAINER REVIEW BUSINESS STORY -->
         <section id="trainer-overview" style="border: 2px solid #0284c7;">
-            <h2 class="section-heading" style="color: #0369a1;">⭐ 3. Trainer Review Module: Business Flow & User Story</h2>
+            <h2 class="section-heading" style="color: #0369a1;">â­ 3. Trainer Review Module: Business Flow & User Story</h2>
 
             <div class="callout callout-tip">
-                <div class="callout-title">🎯 Your Exact Role in the Team</div>
+                <div class="callout-title">ðŸŽ¯ Your Exact Role in the Team</div>
                 <p><em>"My primary responsibility was automating the <strong>Trainer Review Module</strong>. The Trainer is the final evaluator in the ProjectLens platform. When student Pods submit project ideas, an AI engine calculates an initial alignment score. Then the Trainer reviews the submission in the Decision Queue to either <strong>Approve</strong>, <strong>Request Revision</strong>, or <strong>Reject</strong> the project with feedback comments."</em></p>
             </div>
 
@@ -608,8 +608,8 @@
 
         <!-- SECTION 4: REVIEWSPAGE SIDE-BY-SIDE -->
         <section id="reviewspage-sidebyside">
-            <h2 class="section-heading">4. ReviewsPage.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/main/java/com/example/pages/ReviewsPage.java</span>
+            <h2 class="section-heading">4. ReviewsPage.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/cts/pages/ReviewsPage.java</span>
             <p><strong>What this file is doing:</strong> This is the Page Object class for the Trainer Review screen. It holds the element locators for the sidebar tab, the queue list, the details panel, the feedback comment box, and the three decision buttons (<code class="inline">Approve</code>, <code class="inline">Needs Revision</code>, <code class="inline">Reject</code>).</p>
 
             <table class="side-by-side">
@@ -621,11 +621,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="code-col"><span class="kw">package</span> com.example.pages;</td>
+                        <td class="code-col"><span class="kw">package</span> com.cts.pages;</td>
                         <td class="desc-col">Places this class inside the <code class="inline">pages</code> package according to standard Page Object Model convention.</td>
                     </tr>
                     <tr>
-                        <td class="code-col"><span class="kw">import</span> com.example.utils.WaitUtils;
+                        <td class="code-col"><span class="kw">import</span> com.cts.utils.WaitUtils;
 <span class="kw">import</span> org.openqa.selenium.By;
 <span class="kw">import</span> org.openqa.selenium.JavascriptExecutor;
 <span class="kw">import</span> org.openqa.selenium.WebDriver;
@@ -767,8 +767,8 @@
 
         <!-- SECTION 5: TRAINERREVIEWTEST SIDE-BY-SIDE -->
         <section id="trainertest-sidebyside">
-            <h2 class="section-heading">5. TrainerReviewTest.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/test/java/com/example/tests/TrainerReviewTest.java</span>
+            <h2 class="section-heading">5. TrainerReviewTest.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/test/java/com/cts/tests/TrainerReviewTest.java</span>
             <p><strong>What this file is doing:</strong> This is the test script class containing the 5 automated test methods for the Trainer Review module. Before every test, it automatically authenticates as Trainer and navigates to the reviews queue.</p>
 
             <table class="side-by-side">
@@ -895,8 +895,8 @@
 
         <!-- SECTION 6: BASEPAGE SIDE-BY-SIDE -->
         <section id="basepage-sidebyside">
-            <h2 class="section-heading">6. BasePage.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/main/java/com/example/pages/BasePage.java</span>
+            <h2 class="section-heading">6. BasePage.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/cts/pages/BasePage.java</span>
             <p><strong>What this file is doing:</strong> Serves as the foundation parent class for all Page Objects. Wraps raw Selenium interactions with explicit waits to prevent timing issues.</p>
 
             <table class="side-by-side">
@@ -950,8 +950,8 @@
 
         <!-- SECTION 7: BASETEST SIDE-BY-SIDE -->
         <section id="basetest-sidebyside">
-            <h2 class="section-heading">7. BaseTest.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/test/java/com/example/base/BaseTest.java</span>
+            <h2 class="section-heading">7. BaseTest.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/test/java/com/cts/base/BaseTest.java</span>
             <p><strong>What this file is doing:</strong> Manages browser lifecycle for all test classes using TestNG setup and teardown annotations.</p>
 
             <table class="side-by-side">
@@ -999,8 +999,8 @@
 
         <!-- SECTION 8: DRIVERMANAGER SIDE-BY-SIDE -->
         <section id="drivermanager-sidebyside">
-            <h2 class="section-heading">8. DriverManager.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/main/java/com/example/utils/DriverManager.java</span>
+            <h2 class="section-heading">8. DriverManager.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/cts/utils/DriverManager.java</span>
             <p><strong>What this file is doing:</strong> Manages browser creation with <code class="inline">ThreadLocal&lt;WebDriver&gt;</code> to ensure thread safety.</p>
 
             <table class="side-by-side">
@@ -1049,8 +1049,8 @@ driver.<span class="func">manage</span>().<span class="func">window</span>().<sp
 
         <!-- SECTION 9: CONFIGREADER SIDE-BY-SIDE -->
         <section id="configreader-sidebyside">
-            <h2 class="section-heading">9. ConfigReader.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/main/java/com/example/utils/ConfigReader.java</span>
+            <h2 class="section-heading">9. ConfigReader.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/cts/utils/ConfigReader.java</span>
             <p><strong>What this file is doing:</strong> Reads key-value configuration values from <code class="inline">src/test/resources/config/config.properties</code>.</p>
 
             <table class="side-by-side">
@@ -1086,8 +1086,8 @@ driver.<span class="func">manage</span>().<span class="func">window</span>().<sp
 
         <!-- SECTION 10: WAITUTILS SIDE-BY-SIDE -->
         <section id="waitutils-sidebyside">
-            <h2 class="section-heading">10. WaitUtils.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/main/java/com/example/utils/WaitUtils.java</span>
+            <h2 class="section-heading">10. WaitUtils.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/cts/utils/WaitUtils.java</span>
             <p><strong>What this file is doing:</strong> Provides explicit synchronization using Selenium's <code class="inline">WebDriverWait</code>.</p>
 
             <table class="side-by-side">
@@ -1128,8 +1128,8 @@ driver.<span class="func">manage</span>().<span class="func">window</span>().<sp
 
         <!-- SECTION 11: EXCELREADER SIDE-BY-SIDE -->
         <section id="excelreader-sidebyside">
-            <h2 class="section-heading">11. ExcelReader.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/main/java/com/example/utils/ExcelReader.java</span>
+            <h2 class="section-heading">11. ExcelReader.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/cts/utils/ExcelReader.java</span>
             <p><strong>What this file is doing:</strong> Reads test data from <code class="inline">TestData.xlsx</code> using Apache POI.</p>
 
             <table class="side-by-side">
@@ -1162,8 +1162,8 @@ driver.<span class="func">manage</span>().<span class="func">window</span>().<sp
 
         <!-- SECTION 12: DATAPROVIDERS SIDE-BY-SIDE -->
         <section id="dataproviders-sidebyside">
-            <h2 class="section-heading">12. DataProviders.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/main/java/com/example/utils/DataProviders.java</span>
+            <h2 class="section-heading">12. DataProviders.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/cts/utils/DataProviders.java</span>
             <p><strong>What this file is doing:</strong> Acts as the bridge between Apache POI's <code class="inline">ExcelReader</code> and TestNG tests.</p>
 
             <table class="side-by-side">
@@ -1192,8 +1192,8 @@ driver.<span class="func">manage</span>().<span class="func">window</span>().<sp
 
         <!-- SECTION 13: REPORTMANAGER SIDE-BY-SIDE -->
         <section id="reportmanager-sidebyside">
-            <h2 class="section-heading">13. ReportManager.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/main/java/com/example/utils/ReportManager.java</span>
+            <h2 class="section-heading">13. ReportManager.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/main/java/com/cts/utils/ReportManager.java</span>
             <p><strong>What this file is doing:</strong> Initializes the ExtentReports engine and saves the output to <code class="inline">test-output/ExecutionReport.html</code>.</p>
 
             <table class="side-by-side">
@@ -1228,8 +1228,8 @@ extent.<span class="func">setSystemInfo</span>(<span class="str">"Browser"</span
 
         <!-- SECTION 14: TESTLISTENER SIDE-BY-SIDE -->
         <section id="testlistener-sidebyside">
-            <h2 class="section-heading">14. TestListener.java — Code & Line-by-Line Explanation</h2>
-            <span class="file-badge">src/test/java/com/example/listeners/TestListener.java</span>
+            <h2 class="section-heading">14. TestListener.java â€” Code & Line-by-Line Explanation</h2>
+            <span class="file-badge">src/test/java/com/cts/listeners/TestListener.java</span>
             <p><strong>What this file is doing:</strong> Implements TestNG's <code class="inline">ITestListener</code> to log test events into ExtentReports.</p>
 
             <table class="side-by-side">
@@ -1331,7 +1331,7 @@ extent.<span class="func">setSystemInfo</span>(<span class="str">"Browser"</span
 
         <!-- SECTION 16: INTERVIEW PITCH -->
         <section id="speech" style="background: #f0fdf4; border: 2px solid #16a34a;">
-            <h2 class="section-heading" style="color: #15803d;">🏆 16. Word-for-Word Interview Pitch</h2>
+            <h2 class="section-heading" style="color: #15803d;">ðŸ† 16. Word-for-Word Interview Pitch</h2>
 
             <div class="callout callout-tip" style="background: white; border-left-color: #16a34a; font-size: 1rem;">
                 <p><strong>When the interviewer says:</strong> <em>"Tell me about your project and what you did."</em></p>

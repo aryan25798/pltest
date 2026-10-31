@@ -1,6 +1,6 @@
-package com.example.pages;
+package com.cts.pages;
 
-import com.example.utils.WaitUtils;
+import com.cts.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -1,9 +1,9 @@
-package com.example.listeners;
+package com.cts.listeners;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.example.utils.DriverManager;
-import com.example.utils.ReportManager;
+import com.cts.utils.DriverManager;
+import com.cts.utils.ReportManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;

@@ -1,11 +1,11 @@
-package com.example.tests;
+package com.cts.tests;
 
-import com.example.base.BaseTest;
-import com.example.pages.DashboardPage;
-import com.example.pages.LoginPage;
-import com.example.pages.ProjectSubmissionPage;
-import com.example.pages.SubmissionsPage;
-import com.example.utils.DataProviders;
+import com.cts.base.BaseTest;
+import com.cts.pages.DashboardPage;
+import com.cts.pages.LoginPage;
+import com.cts.pages.ProjectSubmissionPage;
+import com.cts.pages.SubmissionsPage;
+import com.cts.utils.DataProviders;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;

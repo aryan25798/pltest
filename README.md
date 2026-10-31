@@ -9,7 +9,7 @@ A clean, standard **Selenium WebDriver + TestNG Page Object Model (POM)** test a
 ```
 testing-pl/
 │
-├── src/main/java/com/example/
+├── src/main/java/com/cts/
 │   ├── pages/                       # 1. PAGE OBJECTS (Locators + Actions)
 │   │   ├── BasePage.java            # Common wrapper methods (click, enterText, getText, isDisplayed)
 │   │   ├── LoginPage.java           # Login page locators and login actions
@@ -28,7 +28,7 @@ testing-pl/
 │       ├── WaitUtils.java           # Explicit waits (WebDriverWait) for element visibility/clickable
 │       └── ReportManager.java       # Configures and writes the Extent HTML report
 │
-├── src/test/java/com/example/
+├── src/test/java/com/cts/
 │   ├── base/
 │   │   └── BaseTest.java            # Setup (@BeforeMethod) and Teardown (@AfterMethod)
 │   │

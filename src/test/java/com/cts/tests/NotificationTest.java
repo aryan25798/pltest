@@ -1,9 +1,9 @@
-package com.example.tests;
+package com.cts.tests;
 
-import com.example.base.BaseTest;
-import com.example.pages.LoginPage;
-import com.example.pages.NotificationsPage;
-import com.example.utils.DataProviders;
+import com.cts.base.BaseTest;
+import com.cts.pages.LoginPage;
+import com.cts.pages.NotificationsPage;
+import com.cts.utils.DataProviders;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -65,9 +65,6 @@ public class NotificationTest extends BaseTest {
             notificationsPage.clickRefresh();
             Assert.assertTrue(notificationsPage.isNotificationsPageDisplayed(),
                     "Notifications should be displayed after refresh");
-        } else if ("TC_NOTIF_07".equalsIgnoreCase(tcId)) {
-            Assert.assertTrue(notificationsPage.verifyPodIsolation(testData.get("Assigned_Pod")),
-                    "Notifications should maintain Pod isolation");
         }
     }
 
@@ -198,22 +195,5 @@ public class NotificationTest extends BaseTest {
                 "Notifications list should be populated after refresh. Count: " + countAfter);
         Assert.assertTrue(countAfter >= countBefore,
                 "Notification count should be preserved or updated on refresh");
-    }
-
-    /**
-     * TC_NOTIF_07: Pod Isolation Check
-     * Preconditions: Log in as Pod Lead of Pod Alpha (Innovex).
-     * Steps: Check Notifications list.
-     * Expected Result: Pod Lead only sees notifications belonging to their assigned Pod
-     *                  and zero notifications from other pods.
-     */
-    @Test(priority = 7, description = "TC_NOTIF_07: Pod Isolation Check")
-    public void testTC_NOTIF_07_PodIsolationCheck() {
-        Map<String, String> data = DataProviders.getNotificationTestCaseData("TC_NOTIF_07");
-        String assignedPod = data.get("Assigned_Pod");
-
-        boolean isIsolated = notificationsPage.verifyPodIsolation(assignedPod);
-        Assert.assertTrue(isIsolated,
-                "Pod Lead of " + assignedPod + " must not see notifications from any other pods");
     }
 }

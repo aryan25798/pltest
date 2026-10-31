@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.cts.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

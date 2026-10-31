@@ -1,9 +1,9 @@
-package com.example.tests;
+package com.cts.tests;
 
-import com.example.base.BaseTest;
-import com.example.pages.DashboardPage;
-import com.example.pages.LoginPage;
-import com.example.utils.DataProviders;
+import com.cts.base.BaseTest;
+import com.cts.pages.DashboardPage;
+import com.cts.pages.LoginPage;
+import com.cts.utils.DataProviders;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -159,7 +159,7 @@ public class LoginTest extends BaseTest {
     public void testTC08_VerifyAccessToProtectedPageWithoutLogin() {
         Map<String, String> data = DataProviders.getTestCaseData("TC08");
 
-        String baseUrl = com.example.utils.ConfigReader.getProperty("app.baseUrl");
+        String baseUrl = com.cts.utils.ConfigReader.getProperty("app.baseUrl");
         String targetUrl = baseUrl.replace("/login", "") + "/dashboard";
         driver.get(targetUrl);
 
